@@ -3,13 +3,13 @@
 <h1>Register</h1>
 <form action="/register" method="POST">
 <label for="">Username</label>
-<input type="text" minlength="4" maxlength="16" required>
+<input name="username" type="text" minlength="4" maxlength="16" required>
 <label for="">Email</label>
-<input type="email" maxlength="30" required>
+<input name="email" type="email" maxlength="30" required>
 <label for="">Password</label>
-<input type="password" minlength="8" maxlength="20" required>
+<input name="password" type="password" minlength="8" maxlength="20" required>
 <label for="">Confirm password</label>
-<input type="password" minlength="8" maxlength="20" required>
+<input name="rePass" type="password" minlength="8" maxlength="20" required>
 <button type="submit">Proceed</button>
 </form>
 </section>
