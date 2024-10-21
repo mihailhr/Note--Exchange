@@ -2,7 +2,7 @@ const express=require("express")
 const bcrypt=require("bcrypt")
 const cookieParser=require("cookie-parser")
 const jwt=require("jsonwebtoken")
-const {createNewUser,checkIfUserExists} = require("../queriesSQL/userQueries")
+const {createNewUser,checkIfUserExists, checkLoginCredentials} = require("../queriesSQL/userQueries")
 const {pool}=require("../DB/pool")
 const postRouter=express.Router()
 const jwtSecret=process.env.SECRET
@@ -35,5 +35,19 @@ postRouter.post("/register",async (req,res)=>{
 postRouter.post("/myAccount",async(req,res)=>{
     res.clearCookie('note_exchange_verification')
     res.redirect("/")
+})
+postRouter.post("/login",async (req,res)=>{
+    const formData=await req.body
+    try {
+        const checkData=await checkLoginCredentials(pool,formData,bcrypt)
+        if(!checkData){
+            return res.render("error",{isLoggedIn:req.userLoggedIn,errorMessage:"Invalid credentials"})
+        }
+        const token= jwt.sign({user:formData.username},jwtSecret,{expiresIn:'1d'})
+       return res.cookie('note_exchange_verification',token).redirect("/myAccount")
+
+    } catch (error) {
+        return res.render("error",{isLoggedIn:req.userLoggedIn,errorMessage:error})
+    }
 })
 module.exports=postRouter

@@ -1,3 +1,6 @@
+
+
+
 async function createNewUser(pool,formData){
     try {
         const client=await pool.connect()
@@ -31,5 +34,26 @@ async function checkIfUserExists(pool,formData){
         client.release()
     }
 }
+async function checkLoginCredentials(pool,formData,bcrypt){
+    const client=await pool.connect()
 
-module.exports={createNewUser,checkIfUserExists}
+    try {
+        const query=`
+        SELECT hashed_pass FROM users
+            WHERE username=$1`
+        const result=await client.query(query,[formData.username])
+        if(result.rows.length<1){
+            return false
+        }
+        const correctPassword=await bcrypt.compare(formData.password,result.rows[0].hashed_pass)    
+        if(!correctPassword){
+            return false
+        }
+        return true
+    } catch (error) {
+        console.error("AN error occurred when verifying user credentials: " + error)
+        return false
+    }
+}
+
+module.exports={createNewUser,checkIfUserExists,checkLoginCredentials}
