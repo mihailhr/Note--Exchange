@@ -2,17 +2,20 @@
 
 
 async function createNewUser(pool,formData){
+    const client=await pool.connect()
     try {
-        const client=await pool.connect()
+        
     const query=(`INSERT INTO users
     (username,email,hashed_pass,creation_date)
     VALUES($1,$2,$3,CURRENT_TIMESTAMP)`)
     console.log(formData.hashedPass)
     const values=[formData.username,formData.email,formData.hashedPass]
     const result=await client.query(query,values)
-    client.release()
+    
     } catch (error) {
         console.error("An error occurred:" + error)
+    }finally{
+        client.release()
     }
     
 }
@@ -53,6 +56,8 @@ async function checkLoginCredentials(pool,formData,bcrypt){
     } catch (error) {
         console.error("AN error occurred when verifying user credentials: " + error)
         return false
+    }finally{
+        client.release()
     }
 }
 

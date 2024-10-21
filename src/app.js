@@ -3,8 +3,7 @@ const {engine}=require("express-handlebars")
 const path=require("path")
 const router=require("./routes/renderPages")
 const postRouter=require("./routes/postRequests")
-const {testDatabaseConnection}=require("./DB/pool")
-const createUsersTable =require("./queriesSQL/setup")
+const {testDatabaseConnection, pool}=require("./DB/pool")
 const cookieParser = require("cookie-parser")
 const checkUserLoggedIn = require("./middlewares/checkAuth")
 require("dotenv").config()
@@ -30,7 +29,7 @@ const port=4000
 
 
 
-// createUsersTable(pool)
+
 
 try {
     testDatabaseConnection()

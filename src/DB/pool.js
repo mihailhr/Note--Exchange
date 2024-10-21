@@ -1,3 +1,5 @@
+const {createSubmissionsTable}= require("../queriesSQL/setup")
+
 const {Pool}=require("pg")
 require("dotenv").config()
 const connection_string=process.env.CONNECTION_STRING
@@ -7,6 +9,7 @@ const pool=new Pool({
 })
 
 async function testDatabaseConnection(){
+   
     try {
         const client=await pool.connect()
     const result=await client.query('SELECT NOW()')
