@@ -6,7 +6,7 @@ const loggedIn=false
 router.get("/",(req,res)=>{
     try {
         console.log(loggedIn)
-        res.status(200).render("home",{loggedIn})
+        res.status(200).render("home",{loggedIn:req.userLoggedIn})
     } catch (error) {
         res.status(500).send("An error ocurred while rendering this page.")
     }
@@ -15,7 +15,7 @@ router.get("/",(req,res)=>{
 
 router.get("/register",(req,res)=>{
     try {
-        res.render("register",{loggedIn})
+        res.render("register",{loggedIn:req.userLoggedIn})
     } catch (error) {
         res.status(500).send("An error ocurred while rendering this page.")
     }
@@ -24,7 +24,7 @@ router.get("/register",(req,res)=>{
 
 router.get("/login",(req,res)=>{
     try {
-        res.render("login",{loggedIn})
+        res.render("login",{loggedIn:req.userLoggedIn})
     } catch (error) {
         res.status(500).send("An error ocurred while rendering this page.")
     }
@@ -32,10 +32,13 @@ router.get("/login",(req,res)=>{
 
 router.get("/error",(req,res)=>{
     try {
-        res.render("error",{loggedIn})
+        res.render("error",{loggedIn:req.userLoggedIn})
     } catch (error) {
         res.status(500).send("An error ocurred while rendering this page.")
     }
+})
+router.get("/myAccount",(req,res)=>{
+    res.render("myAccount",{loggedIn:req.userLoggedIn,user:req.user})
 })
 
 module.exports=router

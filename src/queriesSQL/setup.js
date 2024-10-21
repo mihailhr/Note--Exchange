@@ -16,4 +16,5 @@ const result=await client.query(`CREATE TABLE IF NOT EXISTS users
 
 }
 
+
 module.exports=createUsersTable

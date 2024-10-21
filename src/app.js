@@ -5,6 +5,8 @@ const router=require("./routes/renderPages")
 const postRouter=require("./routes/postRequests")
 const {testDatabaseConnection}=require("./DB/pool")
 const createUsersTable =require("./queriesSQL/setup")
+const cookieParser = require("cookie-parser")
+const checkUserLoggedIn = require("./middlewares/checkAuth")
 require("dotenv").config()
 
 
@@ -14,7 +16,9 @@ require("dotenv").config()
 
 
 const app=express()
+app.use(cookieParser())
 app.use(express.urlencoded({extended:false}))
+app.use(checkUserLoggedIn)
 app.use(express.static(path.join(__dirname, 'public')))
 app.engine('handlebars',engine())
 app.set('view engine', 'handlebars')
