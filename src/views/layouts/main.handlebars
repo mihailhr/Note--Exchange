@@ -1,11 +1,30 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/mainStyles.css">
     <title>Note Exchange</title>
-</head>
-<body>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li>All study materials</li>
+
+        {{#if loggedIn}}
+          <li>Post an educational resource</li>
+
+          <li>Log out</li>
+
+        {{else}}
+
+          <li><a href="/login">Log in</a></li>
+          <li> <a href="/register">Register</a></li>
+
+        {{/if}}
+
+      </ul>
+    </nav>
     {{{body}}}
-</body>
+  </body>
 </html>
