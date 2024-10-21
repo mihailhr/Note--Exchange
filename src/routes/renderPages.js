@@ -29,4 +29,13 @@ router.get("/login",(req,res)=>{
         res.status(500).send("An error ocurred while rendering this page.")
     }
 })
+
+router.get("/error",(req,res)=>{
+    try {
+        res.render("error",{loggedIn})
+    } catch (error) {
+        res.status(500).send("An error ocurred while rendering this page.")
+    }
+})
+
 module.exports=router
