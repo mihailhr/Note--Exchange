@@ -14,4 +14,20 @@ async function createPost(pool,formData,userId){
     }
 }
 
-module.exports={createPost}
+async function getAllMaterials(pool){
+const client =await pool.connect()
+try {
+    const query=`SELECT title,topic,url,username FROM submissions
+    JOIN users ON submissions.creator_id=users.user_id `
+    const result=await client.query(query)
+    const allSubmissions=result.rows
+    console.log(allSubmissions)
+    return allSubmissions
+} catch (error) {
+    console.error("An error occurred when retrieving all study materials from the DB :" +error)
+}finally{
+    client.release()
+}
+}
+
+module.exports={createPost,getAllMaterials}

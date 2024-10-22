@@ -1,7 +1,16 @@
 <section class="content">
     <h1>Currently available study materials</h1>
     {{#if studyMaterials}}
-
+    <ul>
+        {{#each studyMaterials}}
+        <li>
+            <h2>{{title}}</h2>
+            <h3>Topic: {{topic}}</h3>
+            <a href="{{url}}" target="_blank">Link to study material</a>
+            <h4>Published by: <a href="">{{username}}</a></h4>
+        </li>
+        {{/each}}
+    </ul>
 
     {{else}}
     <h1>There are no study materials available right now.</h1>

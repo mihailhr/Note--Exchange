@@ -1,6 +1,7 @@
 const express =require("express")
+const { getAllMaterials } = require("../queriesSQL/resourcesQueries")
 const router=express.Router()
-const loggedIn=false
+const {pool}=require("../DB/pool")
 
 
 router.get("/",(req,res)=>{
@@ -69,11 +70,12 @@ router.get("/postResource",(req,res)=>{
     }
 })
 
-router.get("/allResources",(req,res)=>{
+router.get("/allResources",async (req,res)=>{
     try {
-        res.render("allResources",{loggedIn:req.userLoggedIn})
+        const studyMaterials=await getAllMaterials(pool)
+        res.render("allResources",{loggedIn:req.userLoggedIn,studyMaterials})
     } catch (error) {
-        res.status(500).send("An error ocurred while rendering this page.")
+        res.status(500).send("An error ocurred while rendering this page :"+error)
     }
 })
 
