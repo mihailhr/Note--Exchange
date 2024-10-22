@@ -10,6 +10,9 @@ const jwtSecret=process.env.SECRET
 
 postRouter.post("/register",async (req,res)=>{
     try {
+        if(req.userLoggedIn){
+            return res.send("You are already logged in. If you want to create a new account, you have to log out first")
+        }
        const formData=await req.body
        if(formData.rePass!==formData.password){
         return res.render("error",{isLoggedIn:false,errorMessage:"Invalid password confirmation"})
@@ -34,12 +37,20 @@ postRouter.post("/register",async (req,res)=>{
     
 })
 postRouter.post("/myAccount",async(req,res)=>{
+    if(!req.userLoggedIn){
+        return res.send("You are not currently logged in.")
+    }
+
+
     res.clearCookie('note_exchange_verification')
     res.redirect("/")
 })
 postRouter.post("/login",async (req,res)=>{
     const formData=await req.body
     try {
+        if(req.userLoggedIn){
+            return res.send("You are already logged in.")
+        }
         const checkData=await checkLoginCredentials(pool,formData,bcrypt)
         if(!checkData){
             return res.render("error",{isLoggedIn:req.userLoggedIn,errorMessage:"Invalid credentials"})
@@ -55,6 +66,9 @@ postRouter.post("/login",async (req,res)=>{
 postRouter.post("/postResource", async(req,res)=>{
     const formData=await req.body
     try {
+        if(!req.userLoggedIn){
+            return res.send("You need to be logged in to post new study materials.")
+        }
         const userId=await getUserId(req,pool)
         await createPost(pool,formData,userId)
         

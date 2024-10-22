@@ -15,7 +15,10 @@ router.get("/",(req,res)=>{
 
 router.get("/register",(req,res)=>{
     try {
-        res.render("register",{loggedIn:req.userLoggedIn})
+        if(!req.userLoggedIn){
+        return res.render("register",{loggedIn:req.userLoggedIn})
+        }
+        return res.redirect("/myAccount")
     } catch (error) {
         res.status(500).send("An error ocurred while rendering this page.")
     }
@@ -24,7 +27,11 @@ router.get("/register",(req,res)=>{
 
 router.get("/login",(req,res)=>{
     try {
-        res.render("login",{loggedIn:req.userLoggedIn})
+        if(!req.userLoggedIn){
+         return res.render("login",{loggedIn:req.userLoggedIn})
+        }
+        return res.redirect("/myAccount")
+
     } catch (error) {
         res.status(500).send("An error ocurred while rendering this page.")
     }
@@ -39,7 +46,11 @@ router.get("/error",(req,res)=>{
 })
 router.get("/myAccount",(req,res)=>{
     try {
-        res.render("myAccount",{loggedIn:req.userLoggedIn,user:req.user})
+        if(req.userLoggedIn){
+            return res.render("myAccount",{loggedIn:req.userLoggedIn,user:req.user})
+        }
+        return res.redirect("/notLoggedIn")
+       
     } catch (error) {
         res.status(500).send("An error ocurred while rendering this page.")
     }
@@ -47,8 +58,13 @@ router.get("/myAccount",(req,res)=>{
 })
 router.get("/postResource",(req,res)=>{
     try {
-        res.render("postResource",{loggedIn:req.userLoggedIn})
+        if(req.userLoggedIn){
+            return res.render("postResource",{loggedIn:req.userLoggedIn})
+        }
+        return res.redirect("/notLoggedIn")
+        
     } catch (error) {
+        console.error(error)
         res.status(500).send("An error ocurred while rendering this page.")
     }
 })
@@ -61,4 +77,14 @@ router.get("/allResources",(req,res)=>{
     }
 })
 
+router.get("/notLoggedIn",(req,res)=>{
+    try {
+        if(!req.userLoggedIn){
+            return res.render("notLoggedIn",{loggedIn:req.userLoggedIn})
+        }
+        return res.redirect("/myAccount")
+    } catch (error) {
+        res.status(500).send("An error ocurred while rendering this page.")
+    }
+})
 module.exports=router
