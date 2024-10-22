@@ -3,6 +3,7 @@ const bcrypt=require("bcrypt")
 const cookieParser=require("cookie-parser")
 const jwt=require("jsonwebtoken")
 const {createNewUser,checkIfUserExists, checkLoginCredentials} = require("../queriesSQL/userQueries")
+const {createPost}=require("../queriesSQL/ResourcesQueries")
 const {pool}=require("../DB/pool")
 const postRouter=express.Router()
 const jwtSecret=process.env.SECRET
@@ -50,4 +51,17 @@ postRouter.post("/login",async (req,res)=>{
         return res.render("error",{isLoggedIn:req.userLoggedIn,errorMessage:error})
     }
 })
+
+postRouter.post("/postResource", async(req,res)=>{
+    const formData=await req.body
+    try {
+        await createPost(pool,formData)
+        res.send("ok")
+    } catch (error) {
+        console.error("An error occurred: " + error)
+        res.send(error)
+    }
+})
+
+
 module.exports=postRouter

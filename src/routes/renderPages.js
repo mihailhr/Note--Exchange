@@ -45,5 +45,12 @@ router.get("/myAccount",(req,res)=>{
     }
     
 })
+router.get("/postResource",(req,res)=>{
+    try {
+        res.render("postResource",{loggedIn:req.userLoggedIn})
+    } catch (error) {
+        res.status(500).send("An error ocurred while rendering this page.")
+    }
+})
 
 module.exports=router
