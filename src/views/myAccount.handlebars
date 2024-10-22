@@ -1,5 +1,22 @@
 <section class="content">
     <h1>Hello, {{user}}</h1>
+    {{#if submissions}}
+    
+    <ul>
+        <h2>Your contributions:</h2>
+    {{#each submissions}}
+    <li>
+            <h3>{{title}}</h3>
+            <h3>Topic: {{topic}}</h3>
+            <a href="{{url}}" target="_blank">Link to study material</a>
+            
+        </li>
+    {{/each}}
+    </ul>
+    {{else}}
+    <h3>You haven't posted any study materials yet.</h3>
+    <a href="/postResource"><button>Contribute by sharing a study resource</button></a>
+    {{/if}}
     <form action="/myAccount" method="post">
         <button type="submit">Log out</button>
     </form>
