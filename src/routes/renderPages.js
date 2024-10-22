@@ -2,6 +2,8 @@ const express =require("express")
 const { getAllMaterials, getUserSubmissions } = require("../queriesSQL/resourcesQueries")
 const router=express.Router()
 const {pool}=require("../DB/pool")
+const { route } = require("./postRequests")
+const { getUserInfo } = require("../queriesSQL/userQueries")
 
 
 router.get("/",(req,res)=>{
@@ -91,5 +93,25 @@ router.get("/notLoggedIn",(req,res)=>{
     } catch (error) {
         res.status(500).send("An error ocurred while rendering this page.")
     }
+})
+
+router.get("/users/:username",async(req,res)=>{
+    const username=req.params.username
+    console.log(username)
+    try {
+        if(req.userLoggedIn && req.user===username){
+            return res.redirect("/myAccount")
+        }
+        const userInfo=await getUserInfo(pool,username)
+        if(userInfo.length===0){
+            return res.render("error",{errorMessage:`User ${username} doesn't exist.`,loggedIn:req.userLoggedIn})
+        }
+        res.render("specificUser",{loggedIn:req.userLoggedIn,userInfo})
+    } catch (error) {
+        res.status(500).send("An error ocurred while rendering this page.")
+    }
+    
+    
+    
 })
 module.exports=router

@@ -1,0 +1,9 @@
+<section class="content">
+    {{#each userInfo}}
+        <h1>{{username}}'s account</h1>
+        <h3>Active since: {{creation_date}}</h3>
+        <h2>Have a question that {{username}} could answer?</h2>
+        <a href="mailto:{{email}}">Send them an email</a>
+        
+    {{/each}}
+</section>

@@ -14,7 +14,21 @@ nav ul{
     padding: 3vh 10vw;
     text-transform: uppercase;
     align-items: center;
-    height: 8vh;
+    height: 8vh;background-color: black;
+    color: white;
+}
+nav ul li a{color: white;}
+
+
+.content li{
+    background-color: black;
+    color: white;padding: 4vh 2vw;
+    gap: 2vh;
+    display: flex;
+    flex-direction: column;
+}
+.content li a{
+    color: white;
 }
 
 .content{
@@ -49,13 +63,14 @@ a{
     align-content: center;
     align-items: center;
     border: 2px solid black;
-    height: 4vh;
+    border-radius: 1vw;
     padding: 0.1vh 0.6vw;
+    background-color: white;
     
 }
 #navSearch input, #navSearch button{
     border: none;
-   
+    padding: 0.5vw;
     overflow-y: hidden;
 }
 #navSearch input:focus{
@@ -65,4 +80,12 @@ a{
 #navSearch i{
     font-size: 1vw;
     overflow-y: hidden;
+}
+button{
+    padding: 1vw;
+    border-radius: 1vw;
+}
+input{
+    padding: 0.5vw;
+    border-radius: 0.5vw;
 }

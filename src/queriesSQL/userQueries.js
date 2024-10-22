@@ -78,6 +78,26 @@ async function getUserId(req,pool){
         client.release()
     }
 }
+async function getUserInfo(pool,username){
+const client=await pool.connect()
+console.log(username)
+try {
+    const query=`
+    SELECT username,email,TO_CHAR(creation_date, 'YYYY-MM-DD') AS creation_date FROM users
+    WHERE username = $1`
+    const result=await client.query(query,[username])
+    console.log(result.rows)
+    return result.rows
+
+} catch (error) {
+    console.log(`An error occurred while fetching ${username}'s info: ${error} ` )
+}finally{
+    client.release()
+}
+}
 
 
-module.exports={createNewUser,checkIfUserExists,checkLoginCredentials,getUserId}
+
+
+
+module.exports={createNewUser,checkIfUserExists,checkLoginCredentials,getUserId,getUserInfo}
