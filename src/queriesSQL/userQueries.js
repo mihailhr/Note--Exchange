@@ -61,4 +61,23 @@ async function checkLoginCredentials(pool,formData,bcrypt){
     }
 }
 
-module.exports={createNewUser,checkIfUserExists,checkLoginCredentials}
+
+async function getUserId(req,pool){
+    const client=await pool.connect()
+    try {
+        const username=await req.user
+        const query=`
+        SELECT user_id FROM users
+        WHERE username= $1`
+        const result=await client.query(query,[username])
+        console.log(result.rows[0].user_id)
+        return result.rows[0].user_id
+    } catch (error) {
+        console.error("An error occurred when retrieving the user id from the DB: " + error)
+    }finally{
+        client.release()
+    }
+}
+
+
+module.exports={createNewUser,checkIfUserExists,checkLoginCredentials,getUserId}

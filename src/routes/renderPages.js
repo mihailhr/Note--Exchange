@@ -53,4 +53,12 @@ router.get("/postResource",(req,res)=>{
     }
 })
 
+router.get("/allResources",(req,res)=>{
+    try {
+        res.render("allResources",{loggedIn:req.userLoggedIn})
+    } catch (error) {
+        res.status(500).send("An error ocurred while rendering this page.")
+    }
+})
+
 module.exports=router
