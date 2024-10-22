@@ -3,7 +3,7 @@ const bcrypt=require("bcrypt")
 const cookieParser=require("cookie-parser")
 const jwt=require("jsonwebtoken")
 const {createNewUser,checkIfUserExists, checkLoginCredentials, getUserId} = require("../queriesSQL/userQueries")
-const {createPost}=require("../queriesSQL/resourcesQueries")
+const {createPost, getSearchResults}=require("../queriesSQL/resourcesQueries")
 const {pool}=require("../DB/pool")
 const postRouter=express.Router()
 const jwtSecret=process.env.SECRET
@@ -78,6 +78,16 @@ postRouter.post("/postResource", async(req,res)=>{
         res.send(error)
     }
 })
-
+postRouter.post("/search",async (req,res)=>{
+    const criteria=await req.body.searchCriteria
+    console.log(criteria)
+    try {
+        const searchResults=await getSearchResults(pool,criteria)
+        res.render("allResources",{showingSearch:true,searchResults})
+    } catch (error) {
+        console.error(error)
+        res.send(error)
+    }
+})
 
 module.exports=postRouter

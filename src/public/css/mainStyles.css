@@ -1,3 +1,5 @@
+
+
 *{
     margin: 0;
     padding: 0;
@@ -11,6 +13,8 @@ nav ul{
     justify-content: space-evenly;
     padding: 3vh 10vw;
     text-transform: uppercase;
+    align-items: center;
+    height: 8vh;
 }
 
 .content{
@@ -39,4 +43,26 @@ a{
     gap: 5vh;
     margin-top: 5vh;
     margin-bottom: 5vh;
+}
+#navSearch{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    border: 2px solid black;
+    height: 4vh;
+    padding: 0.1vh 0.6vw;
+    
+}
+#navSearch input, #navSearch button{
+    border: none;
+   
+    overflow-y: hidden;
+}
+#navSearch input:focus{
+    border: none;
+    outline: none;
+}
+#navSearch i{
+    font-size: 1vw;
+    overflow-y: hidden;
 }

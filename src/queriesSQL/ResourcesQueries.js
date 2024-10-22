@@ -49,4 +49,25 @@ try {
 }
 
 
-module.exports={createPost,getAllMaterials,getUserSubmissions}
+async function getSearchResults(pool,criteria){
+    const client=await pool.connect()
+    try {
+        const query=`
+        SELECT title,topic,url,username FROM submissions
+    JOIN users ON submissions.creator_id=users.user_id
+    WHERE title ILIKE $1 
+        OR topic ILIKE $1 
+        OR username ILIKE $1
+        OR url ILIKE $1`
+        const result=await client.query(query,[`%${criteria}%`])
+        const matchingSubmissions=result.rows
+
+        console.log(matchingSubmissions)
+        return matchingSubmissions
+    } catch (error) {
+        console.error("An error occurred while searching the DB for a specific submissions: " + error)
+    }finally{client.release()}
+}
+
+
+module.exports={createPost,getAllMaterials,getUserSubmissions,getSearchResults}
