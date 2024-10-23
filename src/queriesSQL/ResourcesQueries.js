@@ -3,8 +3,8 @@ async function createPost(pool,formData,userId){
     try {        
         const query=`
         INSERT INTO submissions
-        (title,url,topic,creator_id)
-        VALUES($1,$2,$3,$4)`
+        (title,url,topic,creator_id,creation_date)
+        VALUES($1,$2,$3,$4,NOW())`
         const result=await client.query(query,[formData.title,formData.url,formData.topic,userId])
         
     } catch (error) {
@@ -17,7 +17,7 @@ async function createPost(pool,formData,userId){
 async function getAllMaterials(pool){
 const client =await pool.connect()
 try {
-    const query=`SELECT title,topic,url,username FROM submissions
+    const query=`SELECT title,topic,url,username,TO_CHAR(submissions.creation_date, 'YYYY-MM-DD') AS creation_date  FROM submissions
     JOIN users ON submissions.creator_id=users.user_id `
     const result=await client.query(query)
     const allSubmissions=result.rows
@@ -53,7 +53,7 @@ async function getSearchResults(pool,criteria){
     const client=await pool.connect()
     try {
         const query=`
-        SELECT title,topic,url,username FROM submissions
+        SELECT title,topic,url,username,TO_CHAR(submissions.creation_date, 'YYYY-MM-DD') AS creation_date FROM submissions
     JOIN users ON submissions.creator_id=users.user_id
     WHERE title ILIKE $1 
         OR topic ILIKE $1 

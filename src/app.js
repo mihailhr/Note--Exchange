@@ -33,6 +33,7 @@ const port=4000
 
 try {
     testDatabaseConnection()
+    
    app.listen(port)
    console.log("Listening on port " + port) 
 } catch (error) {

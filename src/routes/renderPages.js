@@ -78,6 +78,7 @@ router.get("/postResource",(req,res)=>{
 router.get("/allResources",async (req,res)=>{
     try {
         const studyMaterials=await getAllMaterials(pool)
+        console.log(studyMaterials)
         res.render("allResources",{loggedIn:req.userLoggedIn,studyMaterials})
     } catch (error) {
         res.status(500).send("An error ocurred while rendering this page :"+error)

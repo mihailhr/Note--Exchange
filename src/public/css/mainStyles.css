@@ -89,3 +89,7 @@ input{
     padding: 0.5vw;
     border-radius: 0.5vw;
 }
+nav img{
+    width: 10vw;
+    aspect-ratio: 16/9;
+}

@@ -15,7 +15,7 @@ postRouter.post("/register",async (req,res)=>{
         }
        const formData=await req.body
        if(formData.rePass!==formData.password){
-        return res.render("error",{isLoggedIn:false,errorMessage:"Invalid password confirmation"})
+        return res.render("error",{loggedIn:req.userLoggedIn,errorMessage:"Invalid password confirmation"})
        } 
        const hashedPass= await bcrypt.hash(formData.password,10)
        formData.hashedPass=hashedPass
@@ -24,7 +24,7 @@ postRouter.post("/register",async (req,res)=>{
 
        const userExists = await checkIfUserExists(pool,formData)
        if(userExists){
-        return res.render("error",{isLoggedIn:false,errorMessage:"The username or email you provided is already used"})
+        return res.render("error",{loggedIn:req.userLoggedIn,errorMessage:"The username or email you provided is already used"})
        }
       
        await createNewUser(pool,formData)
@@ -32,7 +32,7 @@ postRouter.post("/register",async (req,res)=>{
        res.cookie('note_exchange_verification',token)
        res.redirect("/myAccount")
     } catch (error) {
-        return res.render("error",{isLoggedIn:false,errorMessage:error})
+        return res.render("error",{loggedIn:req.userLoggedIn,errorMessage:error})
     }
     
 })
@@ -53,13 +53,13 @@ postRouter.post("/login",async (req,res)=>{
         }
         const checkData=await checkLoginCredentials(pool,formData,bcrypt)
         if(!checkData){
-            return res.render("error",{isLoggedIn:req.userLoggedIn,errorMessage:"Invalid credentials"})
+            return res.render("error",{loggedIn:req.userLoggedIn,errorMessage:"Invalid credentials"})
         }
         const token= jwt.sign({user:formData.username},jwtSecret,{expiresIn:'1d'})
        return res.cookie('note_exchange_verification',token).redirect("/myAccount")
 
     } catch (error) {
-        return res.render("error",{isLoggedIn:req.userLoggedIn,errorMessage:error})
+        return res.render("error",{loggedIn:req.userLoggedIn,errorMessage:error})
     }
 })
 
@@ -80,10 +80,10 @@ postRouter.post("/postResource", async(req,res)=>{
 })
 postRouter.post("/search",async (req,res)=>{
     const criteria=await req.body.searchCriteria
-    console.log(criteria)
     try {
         const searchResults=await getSearchResults(pool,criteria)
-        res.render("allResources",{showingSearch:true,searchResults})
+       console.log(req.userLoggedIn)
+        res.render("allResources",{loggedIn:req.userLoggedIn,showingSearch:true,searchResults})
     } catch (error) {
         console.error(error)
         res.send(error)

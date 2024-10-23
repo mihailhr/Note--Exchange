@@ -36,6 +36,21 @@ async function createSubmissionsTable(pool){
     }
 }
 
+async function addPostCreationDate(pool){
+    const client=await pool.connect()
+    try {
+        const query=`ALTER TABLE submissions
+        ADD COLUMN creation_date TIMESTAMP NOT NULL DEFAULT NOW()
+        `
+        const result=client.query(query)
+        console.log("Creation date column added successfully")
+    } catch (error) {
+        console.error("An error ocurred: "+ error)
+    }finally{
+        client.release()
+    }
+}
 
 
-module.exports={createUsersTable,createSubmissionsTable}
+
+module.exports={createUsersTable,createSubmissionsTable,addPostCreationDate}
