@@ -95,7 +95,7 @@ nav img{
     aspect-ratio: 16/9;
 }
 .content img{
-    width: 60vw;
+    width: 50vw;
     aspect-ratio: 16/9;
 }
 
@@ -108,4 +108,35 @@ textarea{
     resize: none;
     height: 15vh;
     padding: 1vw;
+}
+#edit{
+    color: blue;
+}
+#delete{
+    color: red;
+}
+footer{
+    position:fixed;
+    bottom: 0;
+    padding: 1vw;
+    font-weight: 600;
+    text-align: center;
+    width: 100vw;
+    margin-top: 3vh;
+    background-color: black;
+    color: white;
+    
+}
+#scroll{
+    position: fixed;
+    bottom: 10vh;
+    right: 1vw;
+    font-size: 3vw;
+    
+    
+
+}
+ .hidden{
+ visibility: hidden; 
+  
 }

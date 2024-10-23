@@ -126,6 +126,13 @@ router.get("/posts/:id",async (req,res)=>{
     }
     
 })
+router.get("*",(req,res)=>{
+    try {
+        return res.render("error",{errorMessage:`The page you are looking for does not exist.`,loggedIn:req.userLoggedIn})
+    } catch (error) {
+        res.status(500).send("An error ocurred while rendering this page :"+error)
+    }
+})
 
 
 module.exports=router
