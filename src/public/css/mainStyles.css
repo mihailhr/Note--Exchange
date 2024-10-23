@@ -16,6 +16,7 @@ nav ul{
     align-items: center;
     height: 8vh;background-color: black;
     color: white;
+    overflow-y: hidden;
 }
 nav ul li a{color: white;}
 
@@ -92,4 +93,19 @@ input{
 nav img{
     width: 10vw;
     aspect-ratio: 16/9;
+}
+.content img{
+    width: 60vw;
+    aspect-ratio: 16/9;
+}
+
+#changePost{
+    display: flex;
+    gap: 1vw;
+    justify-content: center;
+}
+textarea{
+    resize: none;
+    height: 15vh;
+    padding: 1vw;
 }

@@ -3,9 +3,9 @@ async function createPost(pool,formData,userId){
     try {        
         const query=`
         INSERT INTO submissions
-        (title,url,topic,creator_id,creation_date)
-        VALUES($1,$2,$3,$4,NOW())`
-        const result=await client.query(query,[formData.title,formData.url,formData.topic,userId])
+        (title,url,topic,creator_id,creation_date,description)
+        VALUES($1,$2,$3,$4,NOW(),$5)`
+        const result=await client.query(query,[formData.title,formData.url,formData.topic,userId,formData.description])
         
     } catch (error) {
         console.error("An error occurred when creating a new study resource: " + error)
@@ -33,7 +33,7 @@ try {
 async function getUserSubmissions(pool,username){
     const client =await pool.connect()
 try {
-    const query=`SELECT title,topic,url FROM submissions
+    const query=`SELECT title,topic,url, TO_CHAR(submissions.creation_date, 'YYYY-MM-DD') AS creation_date  FROM submissions
     JOIN users ON submissions.creator_id=users.user_id
     WHERE username= $1 `
     const result=await client.query(query,[username])

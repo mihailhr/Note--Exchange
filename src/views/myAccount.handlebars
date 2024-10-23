@@ -1,24 +1,29 @@
 <section class="content">
-    <h1>Hello, {{user}}</h1>
-    {{#if submissions}}
-    
+  <h1>Hello, {{user}}</h1>
+  {{#if submissions}}
+
     <ul>
-        <h2>Your contributions:</h2>
-    {{#each submissions}}
-    <li>
-            <h3>{{title}}</h3>
-            <h3>Topic: {{topic}}</h3>
-            <hr>
-            <a href="{{url}}" target="_blank">Link to study material</a>
-            
+      <h1>Your contributions:</h1>
+      {{#each submissions}}
+        <li>
+         <h2><a href="/posts/{{title}}">{{title}}</a></h2>
+          <h2>Topic: {{topic}}</h2>
+          <h3>{{creation_date}}</h3>
+          <hr />
+          <a href="{{url}}" target="_blank">Link to study material</a>
+          <section id="changePost">
+            <button><i class="fa-solid fa-pen"></i></a></button>
+            <button id="delete"><i class="fa-solid fa-trash"></i></a></button>
+          </section>
+
         </li>
-    {{/each}}
+      {{/each}}
     </ul>
-    {{else}}
+  {{else}}
     <h3>You haven't posted any study materials yet.</h3>
     <a href="/postResource"><button>Contribute by sharing a study resource</button></a>
-    {{/if}}
-    <form action="/myAccount" method="post">
-        <button type="submit">Log out</button>
-    </form>
+  {{/if}}
+  <form action="/myAccount" method="post">
+    <button type="submit">Log out</button>
+  </form>
 </section>

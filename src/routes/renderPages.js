@@ -115,4 +115,12 @@ router.get("/users/:username",async(req,res)=>{
     
     
 })
+
+router.get("/posts/:id",(req,res)=>{
+    const postName=req.params.id
+    
+    res.render("specificPost",{loggedIn:req.userLoggedIn})
+})
+
+
 module.exports=router

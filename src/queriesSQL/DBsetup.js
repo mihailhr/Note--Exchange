@@ -51,6 +51,21 @@ async function addPostCreationDate(pool){
     }
 }
 
+async function addPostsDescription(pool){
+    const client=await pool.connect()
+    try {
+        const query=`
+        ALTER TABLE submissions
+        ADD COLUMN description VARCHAR(200) NOT NULL DEFAULT 'No description provided'`
+        const result=await client.query(query)
+        console.log("Description column added to table submissions")
+    } catch (error) {
+        console.error("An error ocurred: "+ error)
+    }finally{
+        client.release()
+    }
+}
 
 
-module.exports={createUsersTable,createSubmissionsTable,addPostCreationDate}
+
+module.exports={createUsersTable,createSubmissionsTable,addPostCreationDate,addPostsDescription}

@@ -1,4 +1,3 @@
-const {createSubmissionsTable}= require("../queriesSQL/setup")
 
 const {Pool}=require("pg")
 require("dotenv").config()

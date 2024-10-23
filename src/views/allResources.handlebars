@@ -5,7 +5,7 @@
       <ul>
         {{#each searchResults}}
           <li>
-            <h2>{{title}}</h2>
+            <h2><a href="/posts/{{title}}">{{title}}</a></h2>
             <h3>Topic: {{topic}}</h3>
             <h4>Published by: <a href="/users/{{username}}">{{username}}</a></h4>
             <h4>{{creation_date}}</h4>
@@ -22,10 +22,12 @@
 
     <h1>All currently available study materials</h1>
     {{#if studyMaterials}}
+    <article id="allResults"></article>
+    
       <ul>
         {{#each studyMaterials}}
           <li>
-            <h2>{{title}}</h2>
+            <h2><a href="/posts/{{title}}">{{title}}</a></h2>
             <h3>Topic: {{topic}}</h3>
             
             <h4>Published by: <a href="/users/{{username}}">{{username}}</a></h4>
