@@ -8,8 +8,8 @@ window.scroll({
 })
 }
 function hideOrShowScrollButton(){
-    console.log(window.innerHeight,window.scrollY)
-    if(window.scrollY>window.innerHeight){
+    
+    if(window.scrollY*3>window.innerHeight){
         scrollButton.classList.remove('hidden')
     }else{
         scrollButton.classList.add("hidden")

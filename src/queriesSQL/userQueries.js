@@ -8,7 +8,6 @@ async function createNewUser(pool,formData){
     const query=(`INSERT INTO users
     (username,email,hashed_pass,creation_date)
     VALUES($1,$2,$3,CURRENT_TIMESTAMP)`)
-    console.log(formData.hashedPass)
     const values=[formData.username,formData.email,formData.hashedPass]
     const result=await client.query(query,values)
     
@@ -70,7 +69,6 @@ async function getUserId(req,pool){
         SELECT user_id FROM users
         WHERE username= $1`
         const result=await client.query(query,[username])
-        console.log(result.rows[0].user_id)
         return result.rows[0].user_id
     } catch (error) {
         console.error("An error occurred when retrieving the user id from the DB: " + error)
@@ -80,17 +78,15 @@ async function getUserId(req,pool){
 }
 async function getUserInfo(pool,username){
 const client=await pool.connect()
-console.log(username)
 try {
     const query=`
     SELECT username,email,TO_CHAR(creation_date, 'YYYY-MM-DD') AS creation_date FROM users
     WHERE username = $1`
     const result=await client.query(query,[username])
-    console.log(result.rows)
     return result.rows
 
 } catch (error) {
-    console.log(`An error occurred while fetching ${username}'s info: ${error} ` )
+    console.error(`An error occurred while fetching ${username}'s info: ${error} ` )
 }finally{
     client.release()
 }

@@ -3,7 +3,7 @@ const bcrypt=require("bcrypt")
 const cookieParser=require("cookie-parser")
 const jwt=require("jsonwebtoken")
 const {createNewUser,checkIfUserExists, checkLoginCredentials, getUserId} = require("../queriesSQL/userQueries")
-const {createPost, getSearchResults}=require("../queriesSQL/resourcesQueries")
+const {createPost, getSearchResults, deletePost,getSpecificPost}=require("../queriesSQL/resourcesQueries")
 const {pool}=require("../DB/pool")
 const postRouter=express.Router()
 const jwtSecret=process.env.SECRET
@@ -82,12 +82,34 @@ postRouter.post("/search",async (req,res)=>{
     const criteria=await req.body.searchCriteria
     try {
         const searchResults=await getSearchResults(pool,criteria)
-       console.log(req.userLoggedIn)
         res.render("allResources",{loggedIn:req.userLoggedIn,showingSearch:true,searchResults})
     } catch (error) {
         console.error(error)
         res.send(error)
     }
+})
+postRouter.post("/posts/:id/delete",async(req,res)=>{
+    if (!req.userLoggedIn) {
+        return res.render("notLoggedIn");
+      }
+      try {
+        const postInfo = await getSpecificPost(pool, req.params.id);
+        const postCreator = postInfo[0].username;
+        if (postCreator !== req.user) {
+          return res.render("error", {
+            loggedIn: req.userLoggedIn,
+            errorMessage:
+              "You are not the creator of this post, so you are not allowed to modify it.",
+          });
+        }
+        await deletePost(pool,req.params.id)
+        return res.redirect("/myAccount")
+      } catch (error) {res
+        .status(500)
+        .send("An error ocurred while rendering this page :" + error);
+    }
+    
+     
 })
 
 module.exports=postRouter
