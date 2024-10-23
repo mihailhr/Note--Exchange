@@ -1,5 +1,5 @@
 const express =require("express")
-const { getAllMaterials, getUserSubmissions } = require("../queriesSQL/resourcesQueries")
+const { getAllMaterials, getUserSubmissions, getSpecificPost } = require("../queriesSQL/resourcesQueries")
 const router=express.Router()
 const {pool}=require("../DB/pool")
 const { route } = require("./postRequests")
@@ -11,7 +11,7 @@ router.get("/",(req,res)=>{
         
         res.status(200).render("home",{loggedIn:req.userLoggedIn})
     } catch (error) {
-        res.status(500).send("An error ocurred while rendering this page.")
+        res.status(500).send("An error ocurred while rendering this page :"+error)
     }
     
 })
@@ -23,7 +23,7 @@ router.get("/register",(req,res)=>{
         }
         return res.redirect("/myAccount")
     } catch (error) {
-        res.status(500).send("An error ocurred while rendering this page.")
+        res.status(500).send("An error ocurred while rendering this page :"+error)
     }
 })
 
@@ -36,7 +36,7 @@ router.get("/login",(req,res)=>{
         return res.redirect("/myAccount")
 
     } catch (error) {
-        res.status(500).send("An error ocurred while rendering this page.")
+        res.status(500).send("An error ocurred while rendering this page :"+error)
     }
 })
 
@@ -44,7 +44,7 @@ router.get("/error",(req,res)=>{
     try {
         res.render("error",{loggedIn:req.userLoggedIn})
     } catch (error) {
-        res.status(500).send("An error ocurred while rendering this page.")
+        res.status(500).send("An error ocurred while rendering this page :"+error)
     }
 })
 router.get("/myAccount",async (req,res)=>{
@@ -58,7 +58,7 @@ router.get("/myAccount",async (req,res)=>{
         return res.redirect("/notLoggedIn")
        
     } catch (error) {
-        res.status(500).send("An error ocurred while rendering this page.")
+        res.status(500).send("An error ocurred while rendering this page :"+error)
     }
     
 })
@@ -71,7 +71,7 @@ router.get("/postResource",(req,res)=>{
         
     } catch (error) {
         console.error(error)
-        res.status(500).send("An error ocurred while rendering this page.")
+        res.status(500).send("An error ocurred while rendering this page :"+error)
     }
 })
 
@@ -92,7 +92,7 @@ router.get("/notLoggedIn",(req,res)=>{
         }
         return res.redirect("/myAccount")
     } catch (error) {
-        res.status(500).send("An error ocurred while rendering this page.")
+        res.status(500).send("An error ocurred while rendering this page :"+error)
     }
 })
 
@@ -109,17 +109,22 @@ router.get("/users/:username",async(req,res)=>{
         }
         res.render("specificUser",{loggedIn:req.userLoggedIn,userInfo})
     } catch (error) {
-        res.status(500).send("An error ocurred while rendering this page.")
+        res.status(500).send("An error ocurred while rendering this page :"+error)
     }
     
     
     
 })
 
-router.get("/posts/:id",(req,res)=>{
+router.get("/posts/:id",async (req,res)=>{
     const postName=req.params.id
+    try {
+        const postInfo =await getSpecificPost(pool,postName)
+        res.render("specificPost",{loggedIn:req.userLoggedIn,postInfo})
+    } catch (error) {
+        res.status(500).send("An error ocurred while rendering this page :"+error)
+    }
     
-    res.render("specificPost",{loggedIn:req.userLoggedIn})
 })
 
 

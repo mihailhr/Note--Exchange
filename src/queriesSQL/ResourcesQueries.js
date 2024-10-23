@@ -65,9 +65,27 @@ async function getSearchResults(pool,criteria){
         console.log(matchingSubmissions)
         return matchingSubmissions
     } catch (error) {
-        console.error("An error occurred while searching the DB for a specific submissions: " + error)
+        console.error("An error occurred while searching the DB for a specific submission: " + error)
     }finally{client.release()}
 }
 
+async function getSpecificPost(pool,postTitle){
+    const client=await pool.connect()
+    try {
+       const query=`
+       SELECT title,url,topic,TO_CHAR(submissions.creation_date, 'YYYY-MM-DD') AS creation_date,description,username
+       FROM submissions
+       JOIN users ON submissions.creator_id=users.user_id
+       WHERE title=$1; `
+       const result=await client.query(query,[postTitle]) 
+       console.log(result.rows)
+       return result.rows
+    } catch (error) {
+        console.error("An error occurred while searching the DB for a specific submissions: " + error)
+    }finally{
+        client.release()
+    }
+}
 
-module.exports={createPost,getAllMaterials,getUserSubmissions,getSearchResults}
+
+module.exports={createPost,getAllMaterials,getUserSubmissions,getSearchResults,getSpecificPost}
