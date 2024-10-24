@@ -89,7 +89,16 @@ router.get("/postResource", (req, res) => {
 router.get("/allResources", async (req, res) => {
   try {
     const studyMaterials = await getAllMaterials(pool);
-    res.render("allResources", { loggedIn: req.userLoggedIn, studyMaterials });
+    let adjustedStudyMaterials=[]
+    for(let element of studyMaterials){
+      if(element.username===req.user){
+        element.isCreator=true
+      }
+      adjustedStudyMaterials.push(element)
+    }
+    console.log(adjustedStudyMaterials)
+
+    res.render("allResources", { loggedIn: req.userLoggedIn,studyMaterials:adjustedStudyMaterials });
   } catch (error) {
     res
       .status(500)
@@ -135,6 +144,8 @@ router.get("/posts/:id", async (req, res) => {
   const postName = req.params.id;
   try {
     const postInfo = await getSpecificPost(pool, postName);
+    const isCreator=postInfo[0].username==req.user
+    postInfo[0].isCreator=isCreator
     res.render("specificPost", { loggedIn: req.userLoggedIn, postInfo });
   } catch (error) {
     res

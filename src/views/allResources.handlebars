@@ -11,6 +11,12 @@
             <h4>{{creation_date}}</h4>
             <hr>
             <a href="{{url}}" target="_blank">Link to study material</a>
+            {{#if isCreator}}
+<section id="changePost">
+            <a href="/posts/{{title}}/edit"><button><i id="edit" class="fa-solid fa-pen"></i></button></a>
+            <a href="/posts/{{title}}/delete"><button ><i id="delete" class="fa-solid fa-trash"></i></a></button></a>
+          </section>
+            {{/if}}
           </li>
         {{/each}}
       </ul>
@@ -34,6 +40,12 @@
             <h4>{{creation_date}}</h4>
             <hr>
             <a href="{{url}}" target="_blank">Link to study material</a>
+            {{#if isCreator}}
+<section id="changePost">
+            <a href="/posts/{{title}}/edit"><button><i id="edit" class="fa-solid fa-pen"></i></button></a>
+            <a href="/posts/{{title}}/delete"><button ><i id="delete" class="fa-solid fa-trash"></i></a></button></a>
+          </section>
+            {{/if}}
           </li>
         {{/each}}
       </ul>

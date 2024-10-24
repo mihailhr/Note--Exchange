@@ -112,10 +112,17 @@ postRouter.post("/search", async (req, res) => {
   const criteria = await req.body.searchCriteria;
   try {
     const searchResults = await getSearchResults(pool, criteria);
+    let adjustedSearchResults=[]
+    for(let element of searchResults){
+      if(element.username===req.user){
+        element.isCreator=true
+      }
+      adjustedSearchResults.push(element)
+    }
     res.render("allResources", {
       loggedIn: req.userLoggedIn,
       showingSearch: true,
-      searchResults,
+      searchResults:adjustedSearchResults,
     });
   } catch (error) {
     console.error(error);
