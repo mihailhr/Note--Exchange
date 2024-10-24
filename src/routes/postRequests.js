@@ -13,6 +13,7 @@ const {
   getSearchResults,
   deletePost,
   getSpecificPost,
+  updatePost,
 } = require("../queriesSQL/resourcesQueries");
 const { pool } = require("../DB/pool");
 const { deleteAccount } = require("../queriesSQL/mixedQueries");
@@ -164,5 +165,30 @@ postRouter.post("/users/:id/delete", async (req, res) => {
     res.render("error",{loggedIn:req.userLoggedIn,errorMessage:error})
   }
 });
+
+
+
+postRouter.post("/posts/:id/edit",async (req,res)=>{
+  const formData=await req.body
+  try {
+    const postInfo = await getSpecificPost(pool, req.params.id);
+    const postCreator = postInfo[0].username;
+    if (postCreator !== req.user) {
+      return res.render("error", {
+        loggedIn: req.userLoggedIn,
+        errorMessage:
+          "You are not the creator of this post, so you are not allowed to modify it.",
+      });
+    }
+    await updatePost(pool,req.params.id,formData)
+    res.redirect(`/posts/${req.params.id}`)
+  } catch (error) {
+    res
+      .status(500)
+      .send("An error ocurred while rendering this page :" + error);
+  }
+})
+
+
 
 module.exports = postRouter;

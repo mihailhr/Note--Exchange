@@ -165,6 +165,31 @@ router.get("/posts/:id/delete", async (req, res) => {
 
 });
 
+
+router.get("/posts/:id/edit",async (req,res)=>{
+  if (!req.userLoggedIn) {
+    return res.render("notLoggedIn");
+  }
+  try {
+    const postInfo = await getSpecificPost(pool, req.params.id);
+    const postCreator = postInfo[0].username;
+    if (postCreator !== req.user) {
+      return res.render("error", {
+        loggedIn: req.userLoggedIn,
+        errorMessage:
+          "You are not the creator of this post, so you are not allowed to modify it.",
+      });
+    }
+    res.render("postResource", { loggedIn: req.userLoggedIn,postInfo });
+  } catch (error) {res
+    .status(500)
+    .send("An error ocurred while rendering this page :" + error);
+}
+ 
+})
+
+
+
 router.get("/users/:id/delete",async (req,res)=>{
   if (!req.userLoggedIn) {
     return res.render("notLoggedIn");

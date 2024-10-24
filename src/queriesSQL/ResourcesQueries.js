@@ -102,29 +102,50 @@ async function getSpecificPost(pool, postTitle) {
   }
 }
 
-async function deletePost(pool,title){
-    const client=await pool.connect()
+async function deletePost(pool, title) {
+  const client = await pool.connect();
 
-    try {
-        const query=`
+  try {
+    const query = `
         DELETE FROM submissions
-        WHERE title = $1`
-        const result=await client.query(query,[title])
-        if(!result){
-            return true
-        }
-        return false
-    } catch (error) {
-        console.error(
-            "An error occurred while trying to delete a specific submission: " +
-              error
-          );
-    }finally{
-        client.release()
+        WHERE title = $1`;
+    const result = await client.query(query, [title]);
+    if (!result) {
+      return true;
     }
+    return false;
+  } catch (error) {
+    console.error(
+      "An error occurred while trying to delete a specific submission: " + error
+    );
+  } finally {
+    client.release();
+  }
 }
 
+async function updatePost(pool, postTitle, formData) {
+  const client = await pool.connect();
 
+  try {
+    const query = `
+    UPDATE submissions
+    SET title=$1, topic=$2, url=$3, description=$4
+    WHERE title=$5`;
+    const result = await client.query(query, [
+      formData.title,
+      formData.topic,
+      formData.url,
+      formData.description,
+      postTitle,
+    ]);
+  } catch (error) {
+    console.error(
+      "An error occurred while editing a specific submissions: " + error
+    );
+  } finally {
+    client.release();
+  }
+}
 
 module.exports = {
   createPost,
@@ -132,5 +153,6 @@ module.exports = {
   getUserSubmissions,
   getSearchResults,
   getSpecificPost,
-  deletePost
+  deletePost,
+  updatePost,
 };
