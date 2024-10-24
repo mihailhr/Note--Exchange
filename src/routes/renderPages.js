@@ -163,8 +163,33 @@ router.get("/posts/:id/delete", async (req, res) => {
     .send("An error ocurred while rendering this page :" + error);
 }
 
- 
 });
+
+router.get("/users/:id/delete",async (req,res)=>{
+  if (!req.userLoggedIn) {
+    return res.render("notLoggedIn");
+  }
+  if(req.params.id!==req.user){
+    return res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "You must be signed into this account to modify it",
+    });
+  }
+  try {
+    const userInfo=await getUserInfo(pool,req.params.id)
+    if(!userInfo){
+      return res.render("error",{loggedIn:req.userLoggedIn,errorMessage:'A problem occurred while accessing this account'})
+    }
+    res.render("deleteAccount",{loggedIn:req.userLoggedIn,userInfo})
+  } catch (error) {
+    return res.render("error",{loggedIn:req.userLoggedIn,errorMessage:'A problem occurred while accessing this account - ' + error})
+  }
+ 
+})
+
+
+
 
 router.get("*", (req, res) => {
   try {

@@ -140,3 +140,31 @@ footer{
  visibility: hidden; 
   
 }
+
+
+menu{
+    display: flex;
+    width: 100vw;
+    
+}
+menu form{
+    width: 50vw;
+    border: none;
+}
+menu button{
+    width: 50vw;
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+    font-weight: 600;
+}
+#deleteAccount{
+    background-color: black;
+   
+}
+#deleteAccount {
+    color: red;
+}
+button:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,14 @@
+{{#if userInfo}}
+  {{#each userInfo}}
+    <section class="content">
+      <h1>{{username}}, do you really want to delete your account? This action
+        is irreversible.</h1>
+      <a href="/myAccount"><button>No</button></a>
+      <form action="/users/{{username}}/delete" method="POST">
+        <button type="submit">Yes</button>
+      </form>
+    </section>
+
+  {{/each}}
+
+{{/if}}

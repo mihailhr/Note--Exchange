@@ -1,20 +1,18 @@
 <section class="content">
-    {{#if postInfo}}
+  {{#if postInfo}}
 
     {{#each postInfo}}
-<h1>Do you really want to delete your publication named {{title}}?</h1>
-<a href="/users/{{username}}"><button>Not really</button></a>
-<form action="/posts/{{title}}/delete" method="POST">
-<button type="submit">Yes</button>
-</form>
+      <h1>Do you really want to delete your publication named {{title}}?</h1>
+      <a href="/users/{{username}}"><button>Not really</button></a>
+      <form action="/posts/{{title}}/delete" method="POST">
+        <button type="submit">Yes</button>
+      </form>
 
     {{/each}}
 
-    {{else}}
-<h1>The post you are trying to delete was not found.</h1>
+  {{else}}
+    <h1>The post you are trying to delete was not found.</h1>
 
-    {{/if}}
-
-
+  {{/if}}
 
 </section>
