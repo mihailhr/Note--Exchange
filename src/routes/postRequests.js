@@ -14,7 +14,7 @@ const {
   deletePost,
   getSpecificPost,
   updatePost,
-} = require("../queriesSQL/resourcesQueries");
+} = require("../queriesSQL/resourceQueries");
 const { pool } = require("../DB/pool");
 const { deleteAccount } = require("../queriesSQL/mixedQueries");
 const postRouter = express.Router();

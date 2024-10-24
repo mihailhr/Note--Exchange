@@ -3,7 +3,7 @@ const {
   getAllMaterials,
   getUserSubmissions,
   getSpecificPost,
-} = require("../../src/queriesSQL/resourcesQueries");
+} = require("../queriesSQL/resourceQueries");
 const router = express.Router();
 const { pool } = require("../DB/pool");
 const { route } = require("./postRequests");
