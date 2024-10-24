@@ -21,8 +21,8 @@ app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname,'views'))
 app.use(router)
 app.use(postRouter)
-const port=process.env.PORT||5000
-console.log(port)
+const port=5000
+
 
 
 
@@ -32,7 +32,7 @@ console.log(port)
 try {
     testDatabaseConnection()
     
-   app.listen(port)
+   app.listen(process.env.PORT||port)
    console.log("Listening on port " + port) 
 } catch (error) {
     console.error("An error ocurred: " + error)
