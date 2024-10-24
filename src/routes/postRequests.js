@@ -52,6 +52,7 @@ postRouter.post("/register", async (req, res) => {
     res.cookie("note_exchange_verification", token);
     res.redirect("/myAccount");
   } catch (error) {
+    console.error(error)
     return res.render("error", {
       loggedIn: req.userLoggedIn,
       errorMessage: error,
@@ -86,6 +87,7 @@ postRouter.post("/login", async (req, res) => {
       .cookie("note_exchange_verification", token)
       .redirect("/myAccount");
   } catch (error) {
+    console.error(error)
     return res.render("error", {
       loggedIn: req.userLoggedIn,
       errorMessage: error,
@@ -146,6 +148,7 @@ postRouter.post("/posts/:id/delete", async (req, res) => {
     await deletePost(pool, req.params.id);
     return res.redirect("/myAccount");
   } catch (error) {
+    console.error(error)
     res
       .status(500)
       .send("An error ocurred while rendering this page :" + error);
@@ -179,6 +182,7 @@ postRouter.post("/posts/:id/edit",async (req,res)=>{
   const formData=await req.body
   try {
     const postInfo = await getSpecificPost(pool, req.params.id);
+    
     const postCreator = postInfo[0].username;
     if (postCreator !== req.user) {
       return res.render("error", {
@@ -190,6 +194,7 @@ postRouter.post("/posts/:id/edit",async (req,res)=>{
     await updatePost(pool,req.params.id,formData)
     res.redirect(`/posts/${req.params.id}`)
   } catch (error) {
+    console.error(error)
     res
       .status(500)
       .send("An error ocurred while rendering this page :" + error);

@@ -13,9 +13,12 @@ router.get("/", (req, res) => {
   try {
     res.status(200).render("home", { loggedIn: req.userLoggedIn });
   } catch (error) {
-    res
-      .status(500)
-      .send("An error ocurred while rendering this page :" + error);
+    console.error(error)
+    res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "An error occurred while trying to access this page: " + error
+    });
   }
 });
 
@@ -26,9 +29,12 @@ router.get("/register", (req, res) => {
     }
     return res.redirect("/myAccount");
   } catch (error) {
-    res
-      .status(500)
-      .send("An error ocurred while rendering this page :" + error);
+    console.error(error)
+    res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "An error occurred while trying to access this page: " + error
+    });
   }
 });
 
@@ -39,9 +45,12 @@ router.get("/login", (req, res) => {
     }
     return res.redirect("/myAccount");
   } catch (error) {
-    res
-      .status(500)
-      .send("An error ocurred while rendering this page :" + error);
+    console.error(error)
+    res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "An error occurred while trying to access this page: " + error
+    });
   }
 });
 
@@ -49,9 +58,12 @@ router.get("/error", (req, res) => {
   try {
     res.render("error", { loggedIn: req.userLoggedIn });
   } catch (error) {
-    res
-      .status(500)
-      .send("An error ocurred while rendering this page :" + error);
+    console.error(error)
+    res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "An error occurred while trying to access this page: " + error
+    });
   }
 });
 router.get("/myAccount", async (req, res) => {
@@ -67,9 +79,12 @@ router.get("/myAccount", async (req, res) => {
 
     return res.redirect("/notLoggedIn");
   } catch (error) {
-    res
-      .status(500)
-      .send("An error ocurred while rendering this page :" + error);
+    console.error(error)
+    res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "An error occurred while trying to access your account: " + error,
+    });
   }
 });
 router.get("/postResource", (req, res) => {
@@ -80,9 +95,11 @@ router.get("/postResource", (req, res) => {
     return res.redirect("/notLoggedIn");
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .send("An error ocurred while rendering this page :" + error);
+    res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "An error occurred while trying to post a new study material: " + error,
+    });
   }
 });
 
@@ -96,13 +113,15 @@ router.get("/allResources", async (req, res) => {
       }
       adjustedStudyMaterials.push(element)
     }
-    console.log(adjustedStudyMaterials)
 
     res.render("allResources", { loggedIn: req.userLoggedIn,studyMaterials:adjustedStudyMaterials });
   } catch (error) {
-    res
-      .status(500)
-      .send("An error ocurred while rendering this page :" + error);
+    console.error(error)
+    res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "An error occurred while fetching the available study materials: " + error,
+    });
   }
 });
 
@@ -113,9 +132,12 @@ router.get("/notLoggedIn", (req, res) => {
     }
     return res.redirect("/myAccount");
   } catch (error) {
-    res
-      .status(500)
-      .send("An error ocurred while rendering this page :" + error);
+    console.error(error)
+    res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "An error occurred: " + error,
+    });
   }
 });
 
@@ -134,9 +156,12 @@ router.get("/users/:username", async (req, res) => {
     }
     res.render("specificUser", { loggedIn: req.userLoggedIn, userInfo });
   } catch (error) {
-    res
-      .status(500)
-      .send("An error ocurred while rendering this page :" + error);
+    console.error(error)
+    res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "An error occurred while trying to view this account: " + error,
+    });
   }
 });
 
@@ -148,9 +173,12 @@ router.get("/posts/:id", async (req, res) => {
     postInfo[0].isCreator=isCreator
     res.render("specificPost", { loggedIn: req.userLoggedIn, postInfo });
   } catch (error) {
-    res
-      .status(500)
-      .send("An error ocurred while rendering this page :" + error);
+    console.error(error)
+    res.render("error", {
+      loggedIn: req.userLoggedIn,
+      errorMessage:
+        "An error occurred while trying to view this post: " + error,
+    });
   }
 });
 
@@ -169,9 +197,13 @@ router.get("/posts/:id/delete", async (req, res) => {
       });
     }
     res.render("deletePost", { loggedIn: req.userLoggedIn,postInfo });
-  } catch (error) {res
-    .status(500)
-    .send("An error ocurred while rendering this page :" + error);
+  } catch (error) {
+    console.error(error)
+    res.render("error", {
+    loggedIn: req.userLoggedIn,
+    errorMessage:
+      "An error occurred while trying to delete this post: " + error,
+  });
 }
 
 });
@@ -192,9 +224,13 @@ router.get("/posts/:id/edit",async (req,res)=>{
       });
     }
     res.render("postResource", { loggedIn: req.userLoggedIn,postInfo });
-  } catch (error) {res
-    .status(500)
-    .send("An error ocurred while rendering this page :" + error);
+  } catch (error) {
+    console.error(error)
+     res.render("error", {
+    loggedIn: req.userLoggedIn,
+    errorMessage:
+      "An error occurred while trying to edit this publication: " + error,
+  });
 }
  
 })
@@ -219,6 +255,7 @@ router.get("/users/:id/delete",async (req,res)=>{
     }
     res.render("deleteAccount",{loggedIn:req.userLoggedIn,userInfo})
   } catch (error) {
+    console.error(error)
     return res.render("error",{loggedIn:req.userLoggedIn,errorMessage:'A problem occurred while accessing this account - ' + error})
   }
  
@@ -234,6 +271,7 @@ router.get("*", (req, res) => {
       loggedIn: req.userLoggedIn,
     });
   } catch (error) {
+    console.error(error)
     res
       .status(500)
       .send("An error ocurred while rendering this page :" + error);
