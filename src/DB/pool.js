@@ -1,3 +1,4 @@
+//  PostgreSQL connection pool setup and  a function to test the database connection by querying the current time.
 
 const {Pool}=require("pg")
 require("dotenv").config()

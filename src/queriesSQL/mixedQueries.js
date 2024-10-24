@@ -1,16 +1,23 @@
- async function deleteAccount(pool,username){
+// Functions for database operations related to  both users and submissions management.
+
+
+
+async function deleteAccount(pool,username){
+
+//Deletes both the account and all submissions posted by this user
+
 const client=await pool.connect()
 try {
-    const query1=`
+    const deleteUserSubmissionsQuery=`
     DELETE FROM submissions
     WHERE creator_id=(
     SELECT user_id FROM users WHERE username=$1)`
-    await client.query(query1,[username])
+    await client.query(deleteUserSubmissionsQuery,[username])
 
-    const query2=`
+    const deleteUserAccountQuery=`
     DELETE FROM users
     WHERE username = $1`
-    await client.query(query2,[username])
+    await client.query(deleteUserAccountQuery,[username])
 
 
 } catch (error) {

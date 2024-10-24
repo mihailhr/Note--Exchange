@@ -1,6 +1,10 @@
+// Custom Express router for handling all POST requests. Used in user registration, login, 
+// account management, and resource (post) management.
+
+
+
 const express = require("express");
 const bcrypt = require("bcrypt");
-const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const {
   createNewUser,
@@ -52,7 +56,7 @@ postRouter.post("/register", async (req, res) => {
     res.cookie("note_exchange_verification", token);
     res.redirect("/myAccount");
   } catch (error) {
-    console.error(error)
+    console.error(error);
     return res.render("error", {
       loggedIn: req.userLoggedIn,
       errorMessage: error,
@@ -87,7 +91,7 @@ postRouter.post("/login", async (req, res) => {
       .cookie("note_exchange_verification", token)
       .redirect("/myAccount");
   } catch (error) {
-    console.error(error)
+    console.error(error);
     return res.render("error", {
       loggedIn: req.userLoggedIn,
       errorMessage: error,
@@ -114,17 +118,17 @@ postRouter.post("/search", async (req, res) => {
   const criteria = await req.body.searchCriteria;
   try {
     const searchResults = await getSearchResults(pool, criteria);
-    let adjustedSearchResults=[]
-    for(let element of searchResults){
-      if(element.username===req.user){
-        element.isCreator=true
+    let adjustedSearchResults = [];
+    for (let element of searchResults) {
+      if (element.username === req.user) {
+        element.isCreator = true;
       }
-      adjustedSearchResults.push(element)
+      adjustedSearchResults.push(element);
     }
     res.render("allResources", {
       loggedIn: req.userLoggedIn,
       showingSearch: true,
-      searchResults:adjustedSearchResults,
+      searchResults: adjustedSearchResults,
     });
   } catch (error) {
     console.error(error);
@@ -148,7 +152,7 @@ postRouter.post("/posts/:id/delete", async (req, res) => {
     await deletePost(pool, req.params.id);
     return res.redirect("/myAccount");
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res
       .status(500)
       .send("An error ocurred while rendering this page :" + error);
@@ -166,23 +170,21 @@ postRouter.post("/users/:id/delete", async (req, res) => {
     });
   }
   try {
-     await deleteAccount(pool, req.params.id);
-    
+    await deleteAccount(pool, req.params.id);
+
     res.clearCookie("note_exchange_verification");
     res.redirect("/");
   } catch (error) {
-    console.error(error)
-    res.render("error",{loggedIn:req.userLoggedIn,errorMessage:error})
+    console.error(error);
+    res.render("error", { loggedIn: req.userLoggedIn, errorMessage: error });
   }
 });
 
-
-
-postRouter.post("/posts/:id/edit",async (req,res)=>{
-  const formData=await req.body
+postRouter.post("/posts/:id/edit", async (req, res) => {
+  const formData = await req.body;
   try {
     const postInfo = await getSpecificPost(pool, req.params.id);
-    
+
     const postCreator = postInfo[0].username;
     if (postCreator !== req.user) {
       return res.render("error", {
@@ -191,16 +193,14 @@ postRouter.post("/posts/:id/edit",async (req,res)=>{
           "You are not the creator of this post, so you are not allowed to modify it.",
       });
     }
-    await updatePost(pool,req.params.id,formData)
-    res.redirect(`/posts/${req.params.id}`)
+    await updatePost(pool, req.params.id, formData);
+    res.redirect(`/posts/${req.params.id}`);
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res
       .status(500)
       .send("An error ocurred while rendering this page :" + error);
   }
-})
-
-
+});
 
 module.exports = postRouter;

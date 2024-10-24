@@ -1,3 +1,6 @@
+/* Styles applied to specific elements which appear only in some pages */
+
+
 #changePost{
     display: flex;
     gap: 1vw;

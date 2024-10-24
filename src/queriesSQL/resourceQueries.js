@@ -1,11 +1,13 @@
+// Functions related to changing the contents of the submissions table
+
 async function createPost(pool, formData, userId) {
   const client = await pool.connect();
   try {
-    const query = `
+    const createSubmissionQuery = `
         INSERT INTO submissions
         (title,url,topic,creator_id,creation_date,description)
         VALUES($1,$2,$3,$4,NOW(),$5)`;
-    const result = await client.query(query, [
+    const result = await client.query(createSubmissionQuery, [
       formData.title,
       formData.url,
       formData.topic,
@@ -24,9 +26,9 @@ async function createPost(pool, formData, userId) {
 async function getAllMaterials(pool) {
   const client = await pool.connect();
   try {
-    const query = `SELECT title,topic,url,username,TO_CHAR(submissions.creation_date, 'YYYY-MM-DD') AS creation_date  FROM submissions
+    const getAllSubmissionsQuery = `SELECT title,topic,url,username,TO_CHAR(submissions.creation_date, 'YYYY-MM-DD') AS creation_date  FROM submissions
     JOIN users ON submissions.creator_id=users.user_id `;
-    const result = await client.query(query);
+    const result = await client.query(getAllSubmissionsQuery);
     const allSubmissions = result.rows;
     return allSubmissions;
   } catch (error) {
@@ -42,10 +44,10 @@ async function getAllMaterials(pool) {
 async function getUserSubmissions(pool, username) {
   const client = await pool.connect();
   try {
-    const query = `SELECT title,topic,url, TO_CHAR(submissions.creation_date, 'YYYY-MM-DD') AS creation_date  FROM submissions
+    const getUserSubmissionsQuery = `SELECT title,topic,url, TO_CHAR(submissions.creation_date, 'YYYY-MM-DD') AS creation_date  FROM submissions
     JOIN users ON submissions.creator_id=users.user_id
     WHERE username= $1 `;
-    const result = await client.query(query, [username]);
+    const result = await client.query(getUserSubmissionsQuery, [username]);
     const userSubmissions = result.rows;
     return userSubmissions;
   } catch (error) {
@@ -61,14 +63,14 @@ async function getUserSubmissions(pool, username) {
 async function getSearchResults(pool, criteria) {
   const client = await pool.connect();
   try {
-    const query = `
+    const getSearchResultsQuery = `
         SELECT title,topic,url,username,TO_CHAR(submissions.creation_date, 'YYYY-MM-DD') AS creation_date FROM submissions
     JOIN users ON submissions.creator_id=users.user_id
     WHERE title ILIKE $1 
         OR topic ILIKE $1 
         OR username ILIKE $1
         OR url ILIKE $1`;
-    const result = await client.query(query, [`%${criteria}%`]);
+    const result = await client.query(getSearchResultsQuery, [`%${criteria}%`]);
     const matchingSubmissions = result.rows;
 
     return matchingSubmissions;
@@ -85,12 +87,12 @@ async function getSearchResults(pool, criteria) {
 async function getSpecificPost(pool, postTitle) {
   const client = await pool.connect();
   try {
-    const query = `
+    const getSpecificPostQuery = `
        SELECT title,url,topic,TO_CHAR(submissions.creation_date, 'YYYY-MM-DD') AS creation_date,description,username
        FROM submissions
        JOIN users ON submissions.creator_id=users.user_id
        WHERE title=$1; `;
-    const result = await client.query(query, [postTitle]);
+    const result = await client.query(getSpecificPostQuery, [postTitle]);
     return result.rows;
   } catch (error) {
     console.error(
@@ -106,10 +108,10 @@ async function deletePost(pool, title) {
   const client = await pool.connect();
 
   try {
-    const query = `
+    const deletePostQuery = `
         DELETE FROM submissions
         WHERE title = $1`;
-    const result = await client.query(query, [title]);
+    const result = await client.query(deletePostQuery, [title]);
     if (!result) {
       return true;
     }
@@ -127,11 +129,11 @@ async function updatePost(pool, postTitle, formData) {
   const client = await pool.connect();
 
   try {
-    const query = `
+    const updatePostQuery = `
     UPDATE submissions
     SET title=$1, topic=$2, url=$3, description=$4
     WHERE title=$5`;
-    const result = await client.query(query, [
+    const result = await client.query(updatePostQuery, [
       formData.title,
       formData.topic,
       formData.url,
