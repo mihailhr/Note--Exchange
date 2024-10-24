@@ -21,7 +21,8 @@ app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname,'views'))
 app.use(router)
 app.use(postRouter)
-const port=5000
+const port=process.env.PORT||5000
+console.log(port)
 
 
 

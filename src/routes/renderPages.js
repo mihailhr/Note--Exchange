@@ -3,11 +3,11 @@ const {
   getAllMaterials,
   getUserSubmissions,
   getSpecificPost,
-} = require("../queriesSQL/resourcesQueries");
+} = require("../../src/queriesSQL/resourcesQueries");
 const router = express.Router();
 const { pool } = require("../DB/pool");
 const { route } = require("./postRequests");
-const { getUserInfo } = require("../queriesSQL/userQueries");
+const { getUserInfo } = require("../../src/queriesSQL/userQueries");
 
 router.get("/", (req, res) => {
   try {
