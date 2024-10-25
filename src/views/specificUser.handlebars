@@ -1,16 +1,16 @@
 <section class="content">
-  {{#each userInfo}}
+  {{!-- {{#each userInfo}} --}}
 
     <div id="userInfo">
-<h1>{{username}}'s account</h1>
-    <h3>Active since: {{creation_date}}</h3>
-    <h2>Have a question that {{username}} could answer?</h2>
-    <h3>Contact them <a href="mailto:{{email}}"><i class="fa-solid fa-envelope"></i></a></h3>
+<h1>{{userInfo.username}}'s account</h1>
+    <h3>Active since: {{userInfo.creation_date}}</h3>
+    <h2>Have a question that {{userInfo.username}} could answer?</h2>
+    <h3>Contact them <a href="mailto:{{userInfo.email}}"><i class="fa-solid fa-envelope"></i></a></h3>
     
     </div>
     
     
-  {{/each}}
+  {{!-- {{/each}} --}}
 
 
   {{#if userSubmissions}}

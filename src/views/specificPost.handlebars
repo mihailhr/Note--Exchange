@@ -1,25 +1,25 @@
 <section class="content">
     
     {{#if postInfo}}
-        {{#each postInfo}}
+        
         <article id="postInfo">
-            <h1>{{title}}</h1>
-            <h2>Topic: {{topic}}</h2>
-            <h2>Posted by <a href="/users/{{username}}">{{username}}</a></h2>
+            <h1>{{postInfo.title}}</h1>
+            <h2>Topic: {{postInfo.topic}}</h2>
+            <h2>Posted by <a href="/users/{{postInfo.username}}">{{postInfo.username}}</a></h2>
             <h2>Description:</h2>
-            <h3>{{description}}</h3>
-            <h3>{{creation_date}}</h3>
+            <h3>{{postInfo.description}}</h3>
+            <h3>{{postInfo.creation_date}}</h3>
             <hr>
-            <a href="{{url}}" target="_blank">Link to the study material</a>
-            {{#if isCreator}}
+            <a href="{{postInfo.url}}" target="_blank">Link to the study material</a>
+            {{#if postInfo.isCreator}}
             
             <section id="changePost">
-            <a href="/posts/{{title}}/edit"><button><i id="edit" class="fa-solid fa-pen"></i></button></a>
-            <a href="/posts/{{title}}/delete"><button ><i id="delete" class="fa-solid fa-trash"></i></a></button></a>
+            <a href="/posts/{{postInfo.title}}/edit"><button><i id="edit" class="fa-solid fa-pen"></i></button></a>
+            <a href="/posts/{{postInfo.title}}/delete"><button ><i id="delete" class="fa-solid fa-trash"></i></a></button></a>
           </section>
             {{/if}}
         </article>
-        {{/each}}
+        
     {{else}}
     <h1>The submission you are looking for was not found.</h1>
 
