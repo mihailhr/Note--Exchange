@@ -71,16 +71,16 @@
     gap: 1vh;
     
 }
-#deleteAcc{
+#deleteAcc,#logInChoice,#deletePost{
     display: flex;
     flex-wrap: wrap;
    justify-content: space-evenly;
     width: 40vw;
     margin-top: 5vh;
 }
-#deleteAcc button{width: 10vw;
+#deleteAcc button,#deletePost button{width: 10vw;
 margin: 0;}
-#deleteAcc form{
+#deleteAcc form,#deletePost form{
     padding: 0;
     width: auto;
 }

@@ -1,14 +1,14 @@
 <section class="content">
   {{#if postInfo}}
 
-    
-      <h1>Do you really want to delete your publication named {{postInfo.title}}?</h1>
+    <h1>Do you really want to delete your publication named
+      {{postInfo.title}}?</h1>
+    <div id="deletePost">
       <a href="/users/{{postInfo.username}}"><button>Not really</button></a>
       <form action="/posts/{{postInfo.title}}/delete" method="POST">
         <button type="submit">Yes</button>
       </form>
-
-   
+    </div>
 
   {{else}}
     <h1>The post you are trying to delete was not found.</h1>
