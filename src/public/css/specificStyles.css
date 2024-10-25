@@ -6,32 +6,65 @@
     gap: 1vw;
     justify-content: center;
 }
+#changePost button{
+    background-color: transparent;
+    border: none;
+}
+#changePost i{
+    font-size: 2.7vw;
+}
 #edit{
     color: blue;
 }
 #delete{
     color: red;
 }
-menu{
+
+#userInfo, #postInfo{
     display: flex;
-    width: 100vw;
-    
+    flex-direction: column;
+    gap: 3vh;
+    padding: 3vw;
+    border: 3px solid gray;
+    border-radius: 1vw;
+    justify-content: center;
+    align-items: center;
 }
-menu form{
-    width: 50vw;
-    border: none;
+#userInfo h3{
+    display: flex;
+    align-items: center;
+    gap: 1vw;
 }
-menu button{
-    width: 50vw;
+#userInfo i{
+    color: black;
+    font-size: 2.7vw;
+}
+
+#postInfo h1{
+    font-size: 2vw;
+}
+
+#dropdown{
+    display: none;
+  
+}
+#dropdown button{
     border-radius: 0;
-    border: none;
-    background-color: transparent;
-    font-weight: 600;
+    width: 8vw;
 }
-#deleteAccount{
-    background-color: black;
-   
+#accSettings{
+    margin-top: 5vh;
+    margin-left: 5vw;
+    width: 10vw;
 }
-#deleteAccount {
-    color: red;
+#accSettings p{
+    padding-bottom: 1vh;
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+}
+#accSettings:hover #dropdown{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
 }

@@ -1,4 +1,4 @@
-<menu>
+{{!-- <menu>
 <form id="logout" action="/myAccount" method="post">
     <button type="submit">Log out</button>
   </form>
@@ -6,7 +6,18 @@
   <a href="/users/{{user}}/delete"><button id="deleteAccount" type="submit">Delete account</button></a>
     
   
-</menu>
+</menu> --}}
+
+<div id="accSettings">
+  <p>Account settings <i class="fa-solid fa-arrow-down"></i> </p>
+  <menu id="dropdown">
+    <form id="logout" action="/myAccount" method="post">
+    <button type="submit">Log out</button>
+  </form>
+    <a href="/users/{{user}}/delete"><button id="deleteAccount" type="submit">Delete account</button></a>
+    
+    </menu>
+</div>
 <section class="content">
   <h1>Hello, {{user}}</h1>
   {{#if submissions}}

@@ -158,7 +158,11 @@ router.get("/users/:username", async (req, res) => {
         loggedIn: req.userLoggedIn,
       });
     }
-    res.render("specificUser", { loggedIn: req.userLoggedIn, userInfo });
+    const userSubmissions=await getUserSubmissions(pool,username)
+    
+    console.log(userInfo)
+    console.log(userSubmissions)
+    res.render("specificUser", { loggedIn: req.userLoggedIn, userInfo,userSubmissions });
   } catch (error) {
     console.error(error);
     res.render("error", {
