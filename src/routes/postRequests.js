@@ -1,7 +1,5 @@
-// Custom Express router for handling all POST requests. Used in user registration, login, 
+// Custom Express router for handling all POST requests. Used in user registration, login,
 // account management, and resource (post) management.
-
-
 
 const express = require("express");
 const bcrypt = require("bcrypt");

@@ -151,18 +151,20 @@ router.get("/users/:username", async (req, res) => {
     if (req.userLoggedIn && req.user === username) {
       return res.redirect("/myAccount");
     }
-    const userInfo = await getUserInfo(pool, username)
+    const userInfo = await getUserInfo(pool, username);
     if (userInfo.length === 0) {
       return res.render("error", {
         errorMessage: `User ${username} doesn't exist.`,
         loggedIn: req.userLoggedIn,
       });
     }
-    const userSubmissions=await getUserSubmissions(pool,username)
-    
-    console.log(userInfo)
-    console.log(userSubmissions)
-    res.render("specificUser", { loggedIn: req.userLoggedIn, userInfo:userInfo[0],userSubmissions });
+    const userSubmissions = await getUserSubmissions(pool, username);
+
+    res.render("specificUser", {
+      loggedIn: req.userLoggedIn,
+      userInfo: userInfo[0],
+      userSubmissions,
+    });
   } catch (error) {
     console.error(error);
     res.render("error", {
@@ -179,8 +181,11 @@ router.get("/posts/:id", async (req, res) => {
     const postInfo = await getSpecificPost(pool, postName);
     const isCreator = postInfo[0].username == req.user;
     postInfo[0].isCreator = isCreator;
-    console.log(postInfo[0])
-    res.render("specificPost", { loggedIn: req.userLoggedIn, postInfo:postInfo[0] });
+    console.log(postInfo[0]);
+    res.render("specificPost", {
+      loggedIn: req.userLoggedIn,
+      postInfo: postInfo[0],
+    });
   } catch (error) {
     console.error(error);
     res.render("error", {
@@ -205,7 +210,10 @@ router.get("/posts/:id/delete", async (req, res) => {
           "You are not the creator of this post, so you are not allowed to modify it.",
       });
     }
-    res.render("deletePost", { loggedIn: req.userLoggedIn, postInfo:postInfo[0] });
+    res.render("deletePost", {
+      loggedIn: req.userLoggedIn,
+      postInfo: postInfo[0],
+    });
   } catch (error) {
     console.error(error);
     res.render("error", {
@@ -230,7 +238,10 @@ router.get("/posts/:id/edit", async (req, res) => {
           "You are not the creator of this post, so you are not allowed to modify it.",
       });
     }
-    res.render("postResource", { loggedIn: req.userLoggedIn, postInfo:postInfo[0] });
+    res.render("postResource", {
+      loggedIn: req.userLoggedIn,
+      postInfo: postInfo[0],
+    });
   } catch (error) {
     console.error(error);
     res.render("error", {
@@ -259,8 +270,11 @@ router.get("/users/:id/delete", async (req, res) => {
         errorMessage: "A problem occurred while accessing this account",
       });
     }
-    
-    res.render("deleteAccount", { loggedIn: req.userLoggedIn, userInfo:userInfo[0] });
+
+    res.render("deleteAccount", {
+      loggedIn: req.userLoggedIn,
+      userInfo: userInfo[0],
+    });
   } catch (error) {
     console.error(error);
     return res.render("error", {
@@ -270,11 +284,11 @@ router.get("/users/:id/delete", async (req, res) => {
     });
   }
 });
-router.get("/cronJob",(req,res)=>{
+router.get("/cronJob", (req, res) => {
   // Endpoint for cronjobs - all the other ones fail due to the output being too large, so this one is as short and simplified as possible
-  
-  res.send("OK")
-})
+
+  res.send("OK");
+});
 
 router.get("*", (req, res) => {
   try {

@@ -24,7 +24,7 @@ try {
   testDatabaseConnection();
 
   app.listen(process.env.PORT || port);
-// process.env.PORT was included because some deployment platforms require it.
+  // process.env.PORT was included because some deployment platforms require it.
 
   console.log("Listening on port " + port);
 } catch (error) {

@@ -40,7 +40,9 @@ async function checkLoginCredentials(pool, formData, bcrypt) {
     const getUserPasswordQuery = `
         SELECT hashed_pass FROM users
             WHERE username=$1`;
-    const result = await client.query(getUserPasswordQuery, [formData.username]);
+    const result = await client.query(getUserPasswordQuery, [
+      formData.username,
+    ]);
     if (result.rows.length < 1) {
       return false;
     }

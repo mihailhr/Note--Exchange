@@ -101,15 +101,15 @@ margin: 0;}
  #home {
     height: 80vh;
     padding: 5vh 3vw;
-    font-size: 10vw; /* Adjust size */
-    font-weight: bold; /* Make it bold */
-    color: transparent; /* Transparent text */
-    background-image: url('/images/books.jpg'); /* Path to your image */
-    background-size: cover; /* Cover the text */
-    background-clip: text; /* Clip the background to text */
-    -webkit-background-clip: text; /* Safari support */
-    text-fill-color: transparent; /* Text fill */
-    display: inline-block; /* Allows background to fill */
+    font-size: 10vw;
+    font-weight: bold; 
+    color: transparent; 
+    background-image: url('/images/books.jpg'); 
+    background-size: cover; 
+    background-clip: text; 
+    -webkit-background-clip: text;
+    text-fill-color: transparent; 
+    display: inline-block; 
     text-align: center;
     transition: background-clip 0.8s ease, color 0.8s ease-out;
 }
