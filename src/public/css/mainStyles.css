@@ -69,6 +69,7 @@ nav form input:focus{
    justify-content: center;
    flex-direction: column;
    align-items: center;
+   margin-bottom: 5vh;
 }
 .content form{
     display: flex;
@@ -142,20 +143,34 @@ textarea{
 footer{
     position:fixed;
     bottom: 0;
-    padding: 1vw;
+    padding: 1.6vw;
     font-weight: 600;
     text-align: center;
     width: 100vw;
-    
+    display: flex;
+    align-items: center;
     background-color: black;
     color: white;
+    justify-content: center;
     
+}
+
+footer p{
+    text-align: center;
+}
+#gitHub{
+    position: fixed;
+    left: 2vw;
+    font-size: 3vw;
+    color: white;
 }
 #scroll{
     position: fixed;
     bottom: 10vh;
     right: 1vw;
     font-size: 3vw;
+    background-color: transparent;
+    border: none;
     
     
 
