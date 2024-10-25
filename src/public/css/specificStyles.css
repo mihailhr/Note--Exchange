@@ -71,3 +71,16 @@
     gap: 1vh;
     
 }
+#deleteAcc{
+    display: flex;
+    flex-wrap: wrap;
+   justify-content: space-evenly;
+    width: 40vw;
+    margin-top: 5vh;
+}
+#deleteAcc button{width: 10vw;
+margin: 0;}
+#deleteAcc form{
+    padding: 0;
+    width: auto;
+}
