@@ -268,6 +268,11 @@ router.get("/users/:id/delete", async (req, res) => {
     });
   }
 });
+router.get("/cronJob",(req,res)=>{
+  // Endpoint for cronjobs - all the other ones fail due to the output being too large, so this one is as short and simplified as possible
+  
+  res.send("OK")
+})
 
 router.get("*", (req, res) => {
   try {
