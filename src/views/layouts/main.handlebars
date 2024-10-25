@@ -2,13 +2,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/mainStyles.css">
-    <link rel="stylesheet" href="/css/specificStyles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/mainStyles.css" />
+    <link rel="stylesheet" href="/css/specificStyles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
     <title>Note Exchange</title>
   </head>
   <body>
-    
+
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
@@ -18,7 +21,6 @@
           <li><a href="/postResource">Post an educational resource</a></li>
 
           <li><a href="/myAccount">My account</a></li>
-          
 
         {{else}}
 
@@ -26,20 +28,35 @@
           <li> <a href="/register">Register</a></li>
 
         {{/if}}
-        <li id="navSearch">
+        <li>
           <form action="/search" method="POST">
-          <input type="text" name="searchCriteria" id="search" minlength="3" required>
-          <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-          </form>
+          <input
+            type="text"
+            name="searchCriteria"
+            id="search"
+            minlength="3"
+            required
+          />
+          <button type="submit"><i
+              class="fa-solid fa-magnifying-glass"
+            ></i></button>
+        </form>
         </li>
+        
+
       </ul>
+      
+        
+    
     </nav>
     {{{body}}}
-    <button id="scroll" class="hidden"><i class="fa-solid fa-arrow-up"></i></button>
-  <footer>
-    <p>&copy; Note Exchange 2024</p>
-    
-  </footer>
+    <button id="scroll" class="hidden"><i
+        class="fa-solid fa-arrow-up"
+      ></i></button>
+    <footer>
+      <p>&copy; Note Exchange 2024</p>
+
+    </footer>
 
     <script src="/eventHandlers/scrollToTop.js"></script>
   </body>
