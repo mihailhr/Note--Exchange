@@ -151,7 +151,7 @@ router.get("/users/:username", async (req, res) => {
     if (req.userLoggedIn && req.user === username) {
       return res.redirect("/myAccount");
     }
-    const userInfo = await getUserInfo(pool, username);
+    const userInfo = await getUserInfo(pool, username)
     if (userInfo.length === 0) {
       return res.render("error", {
         errorMessage: `User ${username} doesn't exist.`,
@@ -162,7 +162,7 @@ router.get("/users/:username", async (req, res) => {
     
     console.log(userInfo)
     console.log(userSubmissions)
-    res.render("specificUser", { loggedIn: req.userLoggedIn, userInfo,userSubmissions });
+    res.render("specificUser", { loggedIn: req.userLoggedIn, userInfo:userInfo[0],userSubmissions });
   } catch (error) {
     console.error(error);
     res.render("error", {
@@ -179,7 +179,8 @@ router.get("/posts/:id", async (req, res) => {
     const postInfo = await getSpecificPost(pool, postName);
     const isCreator = postInfo[0].username == req.user;
     postInfo[0].isCreator = isCreator;
-    res.render("specificPost", { loggedIn: req.userLoggedIn, postInfo });
+    console.log(postInfo[0])
+    res.render("specificPost", { loggedIn: req.userLoggedIn, postInfo:postInfo[0] });
   } catch (error) {
     console.error(error);
     res.render("error", {
@@ -204,7 +205,7 @@ router.get("/posts/:id/delete", async (req, res) => {
           "You are not the creator of this post, so you are not allowed to modify it.",
       });
     }
-    res.render("deletePost", { loggedIn: req.userLoggedIn, postInfo });
+    res.render("deletePost", { loggedIn: req.userLoggedIn, postInfo:postInfo[0] });
   } catch (error) {
     console.error(error);
     res.render("error", {
@@ -229,7 +230,7 @@ router.get("/posts/:id/edit", async (req, res) => {
           "You are not the creator of this post, so you are not allowed to modify it.",
       });
     }
-    res.render("postResource", { loggedIn: req.userLoggedIn, postInfo });
+    res.render("postResource", { loggedIn: req.userLoggedIn, postInfo:postInfo[0] });
   } catch (error) {
     console.error(error);
     res.render("error", {
@@ -258,7 +259,8 @@ router.get("/users/:id/delete", async (req, res) => {
         errorMessage: "A problem occurred while accessing this account",
       });
     }
-    res.render("deleteAccount", { loggedIn: req.userLoggedIn, userInfo });
+    
+    res.render("deleteAccount", { loggedIn: req.userLoggedIn, userInfo:userInfo[0] });
   } catch (error) {
     console.error(error);
     return res.render("error", {
