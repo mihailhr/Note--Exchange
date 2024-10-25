@@ -98,25 +98,23 @@ margin: 0;}
     row-gap: 7vh;
 }
 
-#results li{
-    width: 30vw;
-    padding: 3vh 4vw;
-    flex-grow: 0;
-    transition: background-color 0.8s ease, color 0.8s ease;
-    padding: 4vh 2vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+ #home {
+    height: 80vh;
+    padding: 5vh 3vw;
+    font-size: 10vw; /* Adjust size */
+    font-weight: bold; /* Make it bold */
+    color: transparent; /* Transparent text */
+    background-image: url('/images/books.jpg'); /* Path to your image */
+    background-size: cover; /* Cover the text */
+    background-clip: text; /* Clip the background to text */
+    -webkit-background-clip: text; /* Safari support */
+    text-fill-color: transparent; /* Text fill */
+    display: inline-block; /* Allows background to fill */
+    text-align: center;
+    transition: background-clip 0.8s ease, color 0.8s ease-out;
 }
-#results a{
-    transition: background-color 0.8s ease, color 0.8s ease;
+#home:hover {
+    color: white; 
+    background-clip: unset;
+    
 }
-#results li:hover {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-}
-#results li:hover a{
-    color: black;
-}
-
