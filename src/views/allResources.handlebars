@@ -2,6 +2,9 @@
   {{#if showingSearch}}
     {{#if searchResults}}
       <h1>Submissions that match your search:</h1>
+      <article id="results">
+
+      
       <ul>
         {{#each searchResults}}
           <li>
@@ -20,6 +23,7 @@
           </li>
         {{/each}}
       </ul>
+      </article>
     {{else}}
       <h1>No submissions match your search.</h1>
     {{/if}}
@@ -28,9 +32,8 @@
 
     <h1>All currently available study materials</h1>
     {{#if studyMaterials}}
-    <article id="allResults"></article>
-    
-      <ul>
+    <article id="results">
+       <ul>
         {{#each studyMaterials}}
           <li>
             <h2><a href="/posts/{{title}}">{{title}}</a></h2>
@@ -40,6 +43,7 @@
             <h4>{{creation_date}}</h4>
             <hr>
             <a href="{{url}}" target="_blank">Link to study material</a>
+            
             {{#if isCreator}}
 <section id="changePost">
             <a href="/posts/{{title}}/edit"><button><i id="edit" class="fa-solid fa-pen"></i></button></a>
@@ -49,6 +53,9 @@
           </li>
         {{/each}}
       </ul>
+    </article>
+    
+      
 
     {{else}}
       <h1>There are no study materials available right now.</h1>
