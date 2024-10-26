@@ -15,8 +15,10 @@
   {{!-- {{/each}} --}}
 
   {{#if userSubmissions}}
+    <h1>Contributions</h1>
+    <div id="results">
     <ul>
-      <h1>Contributions</h1>
+      
       {{#each userSubmissions}}
         <li>
           <h2><a href="/posts/{{title}}">{{title}}</a></h2>
@@ -24,10 +26,12 @@
 
           <h4>{{creation_date}}</h4>
           <hr />
-          <a href="{{url}}" target="_blank">Link to study material</a>
+            <a href="{{url}}" target="_blank"><p>Link to study material</p></a>
+            <a href="{{url}}" target="_blank"><i class="fa-solid fa-link"></i></a>
         </li>
       {{/each}}
     </ul>
+    </div>
   {{else}}
     <h2>No contributions yet.</h2>
   {{/if}}

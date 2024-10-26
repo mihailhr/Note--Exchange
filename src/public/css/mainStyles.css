@@ -23,9 +23,21 @@ nav ul a{
 nav li{
     display: flex;
     align-items: center;
-    
+   
+    padding: 0.5vh 0.5vw;
+    border-radius: 1vw;
     font-weight: 600;
+    transition: background-color 0.8s ease-in-out;
 } 
+nav li:hover{
+    background-color: white;
+    
+}
+nav li:hover a{
+    color: green
+    ;
+}
+
 nav form{
     display: flex;
     border: none;
@@ -183,25 +195,5 @@ footer p{
 button:hover{
     cursor: pointer;
 }
-.content li{
-    width: 30vw;
-    padding: 3vh 4vw;
-    flex-grow: 0;
-    transition: background-color 0.8s ease, color 0.8s ease;
-    padding: 4vh 2vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
- .content a{
-    transition: background-color 0.8s ease, color 0.8s ease;
-}
-.content li:hover{
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-}
-.content li:hover a{
-    color: black;
-}
+
 
