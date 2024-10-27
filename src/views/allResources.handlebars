@@ -1,13 +1,13 @@
 <section class="content">
   {{#if showingSearch}}
     {{#if searchResults}}
-      <h1>Submissions that match your search:</h1>
+      <h1 class="title">Submissions that match your search:</h1>
       <article id="results">
 
       
       <ul>
         {{#each searchResults}}
-          <li>
+          <li class="resource">
             <h2><a href="/posts/{{title}}">{{title}}</a></h2>
             <h3>Topic: {{topic}}</h3>
             <h4>Published by: <a href="/users/{{username}}">{{username}}</a></h4>
@@ -28,15 +28,15 @@
     {{else}}
       <h1>No submissions match your search.</h1>
     {{/if}}
-    <a href="/allResources"><button>See all submissions</button></a>
+    <a id="seeAll" href="/allResources">See all submissions</a>
   {{else}}
 
-    <h1>All currently available study materials</h1>
+    <h1 class="title">All currently available study materials</h1>
     {{#if studyMaterials}}
     <article id="results">
        <ul>
         {{#each studyMaterials}}
-          <li>
+          <li class="resource">
             <h2><a href="/posts/{{title}}">{{title}}</a></h2>
             <h3>Topic: {{topic}}</h3>
             
@@ -48,8 +48,10 @@
             
             {{#if isCreator}}
 <section id="changePost">
-            <a href="/posts/{{title}}/edit"><button><i id="edit" class="fa-solid fa-pen"></i></button></a>
-            <a href="/posts/{{title}}/delete"><button ><i id="delete" class="fa-solid fa-trash"></i></a></button></a>
+            <p>Modify</p>
+            
+            <a href="/posts/{{title}}/edit"><i id="edit" class="fa-solid fa-pen"></i></a>
+            <a href="/posts/{{title}}/delete"><i id="delete" class="fa-solid fa-trash"></i></a></a>
           </section>
             {{/if}}
           </li>

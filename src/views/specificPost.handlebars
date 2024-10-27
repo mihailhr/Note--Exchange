@@ -1,21 +1,23 @@
 <section class="content">
     
     {{#if postInfo}}
-        
-        <article id="postInfo">
-            <h1>{{postInfo.title}}</h1>
+        <h1 class="title">{{postInfo.title}}</h1>
+        <article class="resource">
+            
             <h2>Topic: {{postInfo.topic}}</h2>
             <h2>Posted by <a href="/users/{{postInfo.username}}">{{postInfo.username}}</a></h2>
             <h2>Description:</h2>
             <h3>{{postInfo.description}}</h3>
             <h3>{{postInfo.creation_date}}</h3>
             <hr>
-            <a href="{{postInfo.url}}" target="_blank">Link to the study material</a>
+            <a href="{{postInfo.url}}" target="_blank"><p>Link to the study material</p></a>
+            <a href="{{postInfo.url}}" target="_blank"><i class="fa-solid fa-link"></i></a>
             {{#if postInfo.isCreator}}
             
             <section id="changePost">
-            <a href="/posts/{{postInfo.title}}/edit"><button><i id="edit" class="fa-solid fa-pen"></i></button></a>
-            <a href="/posts/{{postInfo.title}}/delete"><button ><i id="delete" class="fa-solid fa-trash"></i></a></button></a>
+                <p>Modify</p>
+            <a href="/posts/{{postInfo.title}}/edit"><i id="edit" class="fa-solid fa-pen"></i></a>
+            <a href="/posts/{{postInfo.title}}/delete"><i id="delete" class="fa-solid fa-trash"></i></a>
           </section>
             {{/if}}
         </article>

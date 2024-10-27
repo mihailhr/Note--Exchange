@@ -8,24 +8,34 @@
   
 </menu> --}}
 
-<div id="accSettings">
-  <p><i class="fa-solid fa-user"></i></p>
-  <menu id="dropdown">
-    <form id="logout" action="/myAccount" method="post">
-    <button type="submit">Log out</button>
-  </form>
-    <a href="/users/{{user}}/delete"><button id="deleteAccount" type="submit">Delete account</button></a>
-    
-    </menu>
-</div>
+
 <section class="content">
-  <h1>Hello, {{user}}</h1>
+  <h1 class="title">Manage your account</h1>
+  <article class="userInfo">
+    <div id="leftSide">
+      <i class="fa-solid fa-user"></i>
+      <p>Username: {{userInfo.username}}</p>
+      <p>Email: {{userInfo.email}}</p>
+      <p>Account creation date: {{userInfo.creation_date}}</p>
+    </div>
+    <div id="rightSide">
+      <form id="logout" action="/myAccount" method="post">
+        <button type="submit">Log out</button>
+      </form>
+      <a href="/users/{{user}}/delete">Delete account</a>
+    </div>
+
+
+  </article>
+  
+  
+</div>
   {{#if submissions}}
   <div id="myAccResults">
     <ul>
-      <h1>Your contributions:</h1>
+      <h1 class="title">Your contributions:</h1>
       {{#each submissions}}
-        <li>
+        <li class="resource">
          <h2><a href="/posts/{{title}}">{{title}}</a></h2>
           <h2>Topic: {{topic}}</h2>
           <h3>{{creation_date}}</h3>
@@ -33,8 +43,9 @@
           <a href="{{url}}" target="_blank"><p>Link to study material</p></a>
             <a href="{{url}}" target="_blank"><i class="fa-solid fa-link"></i></a>
           <section id="changePost">
-            <a href="/posts/{{title}}/edit"><button><i id="edit" class="fa-solid fa-pen"></i></button></a>
-            <a href="/posts/{{title}}/delete"><button ><i id="delete" class="fa-solid fa-trash"></i></a></button></a>
+            <p>Modify</p>
+            <a href="/posts/{{title}}/edit"><i id="edit" class="fa-solid fa-pen"></i></a>
+            <a href="/posts/{{title}}/delete"><i id="delete" class="fa-solid fa-trash"></i></a></a>
             
           </section>
 
@@ -43,7 +54,7 @@
     </ul>
     </div>
   {{else}}
-    <h3>You haven't posted any study materials yet.</h3>
+    <h3 class="title">You haven't posted any study materials yet.</h3>
     <a href="/postResource"><button>Contribute by sharing a study resource</button></a>
   {{/if}}
   

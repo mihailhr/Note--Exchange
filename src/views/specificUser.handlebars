@@ -2,25 +2,39 @@
   {{!-- {{#each userInfo}} --}}
 
   <div id="userInfo">
-    <h1>{{userInfo.username}}'s account</h1>
-    <h3>Active since: {{userInfo.creation_date}}</h3>
-    <h2>Have a question that {{userInfo.username}} could answer?</h2>
-    <h3>Contact them
+    <h1 class="title">{{userInfo.username}}'s page</h1>
+
+     <article class="userInfo">
+    <div id="leftSide">
+      <i class="fa-solid fa-user"></i>
+      <p>Username: {{userInfo.username}}</p>
+      <p>Email: {{userInfo.email}}</p>
+      <p>Account creation date: {{userInfo.creation_date}}</p>
+    </div>
+    <div id="rightSide">
+       <h2>Have a question that they could answer?</h2>
+    
       <a href="mailto:{{userInfo.email}}"><i
           class="fa-solid fa-envelope"
-        ></i></a></h3>
+        ></i></a>
+    </div>
+
+
+  </article>
+    
+   
 
   </div>
 
   {{!-- {{/each}} --}}
 
   {{#if userSubmissions}}
-    <h1>Contributions</h1>
+    <h1 class="title">Contributions</h1>
     <div id="results">
     <ul>
       
       {{#each userSubmissions}}
-        <li>
+        <li class="resource">
           <h2><a href="/posts/{{title}}">{{title}}</a></h2>
           <h3>Topic: {{topic}}</h3>
 

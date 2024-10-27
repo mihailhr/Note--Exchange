@@ -1,8 +1,8 @@
 {{#if postInfo}}
 
   <section class="content">
-    <h1>Edit your post</h1>
-    <form action="/posts/{{postInfo.title}}/edit" method="POST">
+    <h1 class="title">Edit your post</h1>
+    <form class="specForm" action="/posts/{{postInfo.title}}/edit" method="POST">
       <label for="title">Title</label>
       <input
         type="text"
@@ -38,15 +38,16 @@
         minlength="10"
         maxlength="200"
       >{{postInfo.description}}</textarea>
-      <button type="submit">Proceed</button>
+      <button id="postB" type="submit">Proceed </button>
+      <button id="checkIcon" type="submit"><i class="fa-solid fa-check"></i></button>
     </form>
 
   </section>
 
 {{else}}
   <section class="content">
-    <h1>Contribute to Note Exchange</h1>
-    <form action="/postResource" method="POST">
+    <h1 class="title">Contribute to Note Exchange</h1>
+    <form class="specForm" action="/postResource" method="POST">
       <label for="title">Title</label>
       <input
         type="text"
@@ -74,7 +75,9 @@
         minlength="10"
         maxlength="200"
       ></textarea>
-      <button type="submit">Post</button>
+      <button id="postB" type="submit">Post </button>
+      <button id="checkIcon" type="submit"><i class="fa-solid fa-check"></i></button>
+      
     </form>
 
   </section>

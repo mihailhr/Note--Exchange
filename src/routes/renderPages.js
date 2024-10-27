@@ -71,10 +71,13 @@ router.get("/myAccount", async (req, res) => {
   try {
     if (req.userLoggedIn) {
       const submissions = await getUserSubmissions(pool, req.user);
+      const userInfo=await getUserInfo(pool,req.user)
+      console.log(userInfo[0])
       return res.render("myAccount", {
         loggedIn: req.userLoggedIn,
         user: req.user,
         submissions,
+        userInfo:userInfo[0]
       });
     }
 

@@ -1,200 +1,155 @@
-
-/* Styles applied to elements that are visible in each page */
-
 *{
-    margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    margin: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
-nav ul{
-    display: flex;
-    flex-wrap: wrap;
-    width: 100vw;
-    background-color: black;
-    
-    padding: 3vh 5vw;
-    justify-content: space-evenly;
-}
-nav ul a{
-    color: white;
-}
-nav li{
-    display: flex;
-    align-items: center;
-   
-    padding: 0.5vh 0.5vw;
-    border-radius: 1vw;
-    font-weight: 600;
-    transition: background-color 0.8s ease-in-out;
-} 
-nav li:hover{
-    background-color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     
 }
-nav li:hover a{
-    color: green
-    ;
-}
-
-nav form{
-    display: flex;
-    border: none;
-} 
-nav form input{
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border: none;
-}
-nav form button{
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-left: none;
-    background-color: black;
-    color: white;
-    border: 2px solid white;
-    
-}
-nav form input:focus{
-    outline: none;
-    box-shadow: none;
-}
 
 
-.content li{
-    background-color: black;
-    color: white;padding: 4vh 2vw;
-    gap: 2vh;
-    display: flex;
-    flex-direction: column;
-}
-.content li a{
-    color: white;
-}
-
-.content{
-    
-    padding: 5vh 10vw;
-   text-align: center;
-   display: flex;
-   justify-content: center;
-   flex-direction: column;
-   align-items: center;
-   margin-bottom: 5vh;
-}
-.content form{
-    display: flex;
-    flex-direction: column;
-    padding: 5vh 10vw;
-    gap: 2vh;
-    width: 40vw;
-
-}
 a{
     text-decoration: none;
 }
-.content ul{
-    display: flex;
-    flex-direction: column;
-    gap: 5vh;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-}
-#navSearch{
-    display: flex;
-    align-content: center;
-    align-items: center;
-    border: 2px solid black;
-    border-radius: 1vw;
-    padding: 0.1vh 0.6vw;
-    background-color: white;
-    
-}
-#navSearch input, #navSearch button{
-    border: none;
-    padding: 0.5vw;
-    overflow-y: hidden;
-}
-#navSearch input:focus{
-    border: none;
-    outline: none;
-}
-#navSearch i{
-    font-size: 1vw;
-    overflow-y: hidden;
-}
-button{
-    padding: 1vw;
-    border-radius: 1vw;
-    
-}
-.content button{
-    margin-bottom: 4vh;
-}
-input{
-    padding: 0.5vw;
-    border-radius: 0.5vw;
-}
-nav img{
-    width: 10vw;
-    aspect-ratio: 16/9;
-}
-.content img{
-    width: 50vw;
-    aspect-ratio: 16/9;
-}
-
-
-textarea{
-    resize: none;
-    height: 15vh;
-    padding: 1vw;
-}
-
-footer{
-    position:fixed;
-    bottom: 0;
-    padding: 1.6vw;
-    font-weight: 600;
-    text-align: center;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    background-color: black;
-    color: white;
-    justify-content: center;
-    
-}
-
-footer p{
-    text-align: center;
-}
-#gitHub{
-    position: fixed;
-    left: 2vw;
-    font-size: 3vw;
-    color: white;
-}
-#scroll{
-    position: fixed;
-    bottom: 10vh;
-    right: 1vw;
-    font-size: 3vw;
-    background-color: transparent;
-    border: none;
-  
-    
-    
-
-}
- .hidden{
- visibility: hidden; 
-  
-}
-
-button:hover{
+ li{list-style: none;}
+button:hover,a:hover{
     cursor: pointer;
 }
 
+textarea{
+    resize: none;
+}
 
+
+nav{
+    width: 100vw;
+    padding: 4vh 5vw;
+    background-color: black;
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 2vh;
+    /* column-gap: 3vw; */
+}
+nav ul a{
+    text-transform: uppercase;
+    color: white;
+    font-size: 1.4vw;
+    padding: .5vw;
+    border-radius: 1vw;
+    transition: background-color 0.8s ease,color 0.8s ease;
+   
+}
+nav form{
+    display: flex;
+    
+}
+nav form button{
+    border: none;
+    font-size: 1.5vw;
+    padding: 0.5vw;
+    border-top-right-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+    background-color: #57A6A1;
+    color: white;
+}
+nav form input{
+    border: none;
+    padding: 0.4vw;
+    border-top-left-radius: 1vw;
+    border-bottom-left-radius: 1vw;
+}
+
+nav form input:focus{
+    outline: none;
+    box-shadow: none;
+
+}
+
+
+
+nav ul a:hover{
+    background-color: #57A6A1;
+    
+}
+
+
+
+
+
+#gitHub{
+    position: absolute;
+    left: 1vw;
+    bottom: 1vh;
+    color: white;
+    transition: color 0.8s ease;
+    font-size: 2.6vw;
+}
+#github:hover{
+    color: #57A6A1;
+}
+
+#scroll{
+    color: white;
+    background-color: #57A6A1;
+    border-radius: 5vw;
+    padding: 1vw;
+    
+    border: none;
+    font-size: 3vw;
+    position: fixed;
+    bottom: 8vh;
+    right: 1vw;
+    transition: background-color 0.8s ease, color 0.8s ease ;
+}
+#scroll:hover{
+    background-color: white;
+    color: #57A6A1;
+}
+.hidden{
+    visibility: hidden;
+}
+
+
+footer{
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    padding: 2vh 5vw;
+    color: white;
+    background-color: black;
+    font-size: 1.3vw;
+    width: 100vw;
+}
+
+
+
+
+
+
+#home {
+    height: 80vh;
+    padding: 5vh 3vw;
+    font-size: 10vw;
+    font-weight: bold; 
+    color: transparent; 
+    background-image: url('/images/books.webp'); 
+    background-size: cover; 
+    background-clip: text; 
+    -webkit-background-clip: text;
+    text-fill-color: transparent; 
+    display: inline-block; 
+    text-align: center;
+    background-color: #57A6A1;
+    transition: background-clip 0.8s ease, color 0.8s ease-out;
+}
+#home:hover {
+    color: white; 
+    background-clip: unset;
+    
+}
