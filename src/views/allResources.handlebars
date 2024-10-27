@@ -2,7 +2,7 @@
   {{#if showingSearch}}
     {{#if searchResults}}
       <h1 class="title">Submissions that match your search:</h1>
-      <article id="results">
+      <article >
 
       
       <ul>
@@ -16,7 +16,7 @@
              <a href="{{url}}" target="_blank"><p>Link to study material</p></a>
             <a href="{{url}}" target="_blank"><i class="fa-solid fa-link"></i></a>
             {{#if isCreator}}
-<section id="changePost">
+          <section id="changePost">
             <a href="/posts/{{title}}/edit"><button><i id="edit" class="fa-solid fa-pen"></i></button></a>
             <a href="/posts/{{title}}/delete"><button ><i id="delete" class="fa-solid fa-trash"></i></a></button></a>
           </section>
@@ -47,7 +47,7 @@
             <a href="{{url}}" target="_blank"><i class="fa-solid fa-link"></i></a>
             
             {{#if isCreator}}
-<section id="changePost">
+          <section id="changePost">
             <p>Modify</p>
             
             <a href="/posts/{{title}}/edit"><i id="edit" class="fa-solid fa-pen"></i></a>
